@@ -1,10 +1,78 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <link rel="stylesheet" href="./styles.css">
     <meta charset="UTF-8">
     <title>Whats Cookin</title>
   </head>
   <body>
-    <h1>Whats Cookin</h1>
+    <main>
+      <nav>
+        <div>
+          <h1>Whats Cookin</h1>
+        </div>
+        <div>
+          <form>
+            <input type="text" placeholder="Search by recipe name or ingredient"></input>
+          </form>
+          <button type="submit">Search</button>
+        </div>
+        <div>
+          <button>Filter</button>
+          <button>Favorites❤️</button>
+          <button>To Cook🥘</button>
+        </div>
+      </nav>
+      <section class="search-or-favorites-or-to-cook-view hidden">
+        <h1>User searched criteria/filters or Favorites or To Cook</h1>
+        <section class="recipe-card-section hidden">
+          <article>
+            <img>
+            <button>Recipe Name</button>
+            <div>
+              <button>🥘</button>
+              <button>❤️</button>
+            </div>
+          </article>
+        </section>
+      </section>
+      <section class="recipe-details-view hidden">
+        <section class="recipe-header">
+          <div>
+            <span>Recipe Name</span>
+            <span>Recipe Cost</span>
+            <div>
+              <button>🥘</button>
+              <button>❤️</button>
+            </div>
+          </div>
+        </section>
+        <div class= "recipe-details">
+          <section class="ingredients">
+            <h2>Ingredients</h2>
+            <ul>
+              <li>beans</li>
+            </ul>
+          </section>
+          <section class="instructions">
+            <h2>Instruction</h2>
+            <ol>
+              <li>mix beans</li>
+            </ol>
+          </section>
+        </div><
+      </section>
+      <section class="filter-view hidden">
+        <form>
+          <h2>Choose options to filter your recipes below</h2>
+          <section>
+            <input type="radio" id="beans" name="tag" value="beans">
+            <label for="beans">Beans</label>
+          </section>
+          <button>Get Recipes</button>
+        </form>
+      </section>
+    </main>
+    <!-- add script -->
   </body>
 </html>
