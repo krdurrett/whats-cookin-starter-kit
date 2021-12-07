@@ -1,3 +1,31 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100vh;
+}
+
 body {
-  background-color: blueviolet;
+  background-image: url("https://spoonacular.com/recipeImages/595736-556x370.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin: 0;
+}
+
+main {
+  display: flex;
+}
+
+nav {
+  display:flex;
+  background-color: rgba(225, 225, 225, .9);
+  width: 100%;
+  height: 50%;
+
+}
+
+
+.hidden {
+  display: none;
 }
