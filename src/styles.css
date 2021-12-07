@@ -85,6 +85,9 @@ height: 85%;
 }
 
 .recipe-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   border: 2px solid yellow;
   width: 15%;
   height: 50%;
@@ -93,6 +96,50 @@ height: 85%;
 .recipe-card-img {
   width: auto;
   height: 40%;
+}
+
+.recipe-card-buttons {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.recipe-details-view {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.recipe-header {
+  display: flex;
+  justify-content: space-between;
+  background-image: url("https://spoonacular.com/recipeImages/595736-556x370.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  border: 2px solid red;
+}
+
+.recipe-details {
+  display: flex;
+  justify-content: space-around;
+}
+
+.recipe-details,
+.recipe-header {
+  height: 40%;
+  width: 60%;
+  background-color: rgba(225, 225, 225, .6);
+}
+
+.recipe-detail-buttons {
+  display: flex;
+  align-items: flex-end;
+  align-self: flex-start;
+  border: 2px solid blue;
+  /* justify-content: flex-start; */
 }
 
 .hidden {
