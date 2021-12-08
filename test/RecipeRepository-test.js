@@ -2,7 +2,7 @@ import { expect } from 'chai';
 import RecipeRepository from '../src/classes/RecipeRepository';
 import { recipeData, ingredientsData } from '../src/data/recipes-test';
 
-describe('Recipe', () => {
+describe('RecipeRepository', () => {
   let recipeRepository;
   beforeEach(() => {
     recipeRepository = new RecipeRepository(recipeData);
@@ -31,8 +31,6 @@ describe('Recipe', () => {
   it('Should be able to filter recipes by name or ingredient', () => {
     recipeRepository.getRecipeByNameOrIngredients('Cookie');
     //also test for ingredient
-    console.log('ingredients?? ', ingredientsData)
-
     expect(recipeRepository.filteredRecipes).to.be.an('array');
     expect(recipeRepository.filteredRecipes[0]).to.be.an('object');
   });
