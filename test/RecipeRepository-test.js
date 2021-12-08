@@ -29,7 +29,7 @@ describe('Recipe', () => {
   });
 
   it('Should be able to filter recipes by name or ingredient', () => {
-    recipeRepository.getRecipeByNameOrIngredients('cookie');
+    recipeRepository.getRecipeByNameOrIngredients('Cookie');
     //also test for ingredient
 
     expect(recipeRepository.filteredRecipes).to.be.an('array');
