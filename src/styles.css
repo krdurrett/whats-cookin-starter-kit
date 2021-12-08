@@ -119,7 +119,6 @@ height: 85%;
   background-repeat: no-repeat;
   background-size: cover;
   width: 100%;
-  border: 2px solid red;
 }
 
 .recipe-details {
@@ -138,8 +137,39 @@ height: 85%;
   display: flex;
   align-items: flex-end;
   align-self: flex-start;
-  border: 2px solid blue;
-  /* justify-content: flex-start; */
+}
+
+.filter-view {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.filter-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 75%;
+  width: 50%;
+  background-color: rgba(225, 225, 225, .6);
+}
+
+.filter-view-title {
+  text-align: center;
+}
+
+.filter-view-tags {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width: 50%;
+  height: 75%;
+}
+
+.filter-view-button {
+  border: 2px solid purple;
 }
 
 .hidden {

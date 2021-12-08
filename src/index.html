@@ -24,17 +24,17 @@
       <section class="search-or-favorites-or-to-cook-view hidden">
         <h1>User searched criteria/filters or Favorites or To Cook</h1>
         <section class="recipe-card-section">
-          <article class="recipe-card">
+          <section class="recipe-card">
             <img class="recipe-card-img" src="https://spoonacular.com/recipeImages/595736-556x370.jpg">
             <button>Recipe Name</button>
             <div class="recipe-card-buttons">
               <button>🥘</button>
               <button>❤️</button>
             </div>
-          </article>
+          </section>
         </section>
       </section>
-      <section class="recipe-details-view">
+      <section class="recipe-details-view hidden">
         <section class="recipe-header">
           <span>Recipe Name</span>
           <span>Recipe Cost</span>
@@ -58,14 +58,16 @@
           </section>
         </div><
       </section>
-      <section class="filter-view hidden">
-        <form>
-          <h2>Choose options to filter your recipes below</h2>
-          <section>
+      <section class="filter-view">
+        <form class="filter-form">
+          <h2 class="filter-view-title">Choose options to filter your recipes below</h2>
+          <section class="filter-view-tags">
             <input type="radio" id="beans" name="tag" value="beans">
             <label for="beans">Beans</label>
+            <input type="radio" id="beans2" name="tag" value="beans2">
+            <label for="beans2">Beans2</label>
           </section>
-          <button>Get Recipes</button>
+          <button class="filter-view-button">Get Recipes</button>
         </form>
       </section>
     </main>
