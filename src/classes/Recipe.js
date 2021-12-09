@@ -1,4 +1,4 @@
-import { ingredientsData } from '../src/data/recipes-test';
+// import { ingredientsData } from '../src/data/recipes-test';
 
 class Recipe {
   constructor(recipe) {

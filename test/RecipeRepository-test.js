@@ -5,7 +5,7 @@ import { recipeData, ingredientsData } from '../src/data/recipes-test';
 describe('RecipeRepository', () => {
   let recipeRepository;
   beforeEach(() => {
-    recipeRepository = new RecipeRepository(recipeData);
+    recipeRepository = new RecipeRepository(recipeData, ingredientsData);
   });
 
   it('Should be a function', () => {
@@ -28,10 +28,15 @@ describe('RecipeRepository', () => {
     expect(recipeRepository.filteredRecipes[0]).to.be.an('object');
   });
 
-  it('Should be able to filter recipes by name or ingredient', () => {
-    recipeRepository.getRecipeByNameOrIngredients('Cookie');
-    //also test for ingredient
+  it('Should be able to filter recipes by name', () => {
+    recipeRepository.getRecipeByName('Cookie');
     expect(recipeRepository.filteredRecipes).to.be.an('array');
     expect(recipeRepository.filteredRecipes[0]).to.be.an('object');
   });
+
+  it('Should be able to filter recipe by ingredient', () => {
+    recipeRepository.getRecipeByIngredients('bicarbonate of soda');
+    expect(recipeRepository.filteredRecipes[0]).to.be.an('object');
+  })
+
 })
