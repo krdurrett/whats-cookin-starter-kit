@@ -30,11 +30,13 @@ class RecipeRepository {
         if(recipeIngredient) {
           return recipeIngredient.id === ingredient.id;
         } else {
-          return [];
+          return false;
         }
       })
       recipesToPush.forEach(recipe => {
-        this.filteredRecipes.push(recipe);
+        if (!this.filteredRecipes.includes(recipe)) {
+          this.filteredRecipes.push(recipe);
+        }
       })
     })
   }

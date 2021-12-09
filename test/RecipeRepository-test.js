@@ -35,7 +35,8 @@ describe('RecipeRepository', () => {
   });
 
   it('Should be able to filter recipe by ingredient', () => {
-    recipeRepository.getRecipeByIngredients('bicarbonate of soda');
+    recipeRepository.getRecipeByIngredients('salt');
+    expect(recipeRepository.filteredRecipes.length).to.equal(1);
     expect(recipeRepository.filteredRecipes[0]).to.be.an('object');
   })
 
