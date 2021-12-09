@@ -12,7 +12,7 @@ class RecipeRepository {
   }
   getRecipeByNameOrIngredients(searchPhrase) {
     this.recipes.filter(recipe => {
-      if(recipe.name.includes(searchPhrase)) {
+      if(recipe.name.includes(searchPhrase) {
         this.filteredRecipes.push(recipe);
       }
     })

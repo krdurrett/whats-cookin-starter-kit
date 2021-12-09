@@ -1,3 +1,5 @@
+import { ingredientsData } from '../src/data/recipes-test';
+
 class Recipe {
   constructor(recipe) {
     this.id = recipe.id;
