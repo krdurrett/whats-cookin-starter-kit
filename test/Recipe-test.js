@@ -4,9 +4,10 @@ import { recipeData, ingredientsData } from '../src/data/recipes-test';
 
 describe('Recipe', () => {
   let recipe;
+  let recipeRepository;
   beforeEach(() => {
     recipeData.forEach(recipes => {
-      recipe = new Recipe(recipes);
+      recipe = new Recipe(recipes, ingredientsData);
     })
   });
 
@@ -43,5 +44,8 @@ describe('Recipe', () => {
     expect(recipe.tags.length).to.equal(4);
   });
 
-  it('')
+  it('Should be able to determine the names of ingredients', () => {
+    recipe.getIngredientNames();
+    expect(recipe.getIngredientNames()).to.be.an('array');
+  })
 })
