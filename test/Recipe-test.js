@@ -48,4 +48,9 @@ describe('Recipe', () => {
     recipe.getIngredientNames();
     expect(recipe.getIngredientNames()).to.be.an('array');
   })
+
+  it('Should be able to calculate the total recipe cost', () => {
+    recipe.getRecipeCost();
+    expect(recipe.totalRecipeCost).to.be.a('number');
+  })
 })
