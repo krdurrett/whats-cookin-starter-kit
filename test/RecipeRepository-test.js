@@ -2,10 +2,10 @@ import { expect } from 'chai';
 import RecipeRepository from '../src/classes/RecipeRepository';
 import { recipeData, ingredientsData } from '../src/data/recipes-test';
 
-describe('Recipe', () => {
+describe('RecipeRepository', () => {
   let recipeRepository;
   beforeEach(() => {
-    recipeRepository = new RecipeRepository(recipeData);
+    recipeRepository = new RecipeRepository(recipeData, ingredientsData);
   });
 
   it('Should be a function', () => {
@@ -28,12 +28,16 @@ describe('Recipe', () => {
     expect(recipeRepository.filteredRecipes[0]).to.be.an('object');
   });
 
-  it('Should be able to filter recipes by name or ingredient', () => {
-    recipeRepository.getRecipeByNameOrIngredients('Cookie');
-    //also test for ingredient
-    console.log('ingredients?? ', ingredientsData)
-
+  it('Should be able to filter recipes by name', () => {
+    recipeRepository.getRecipeByName('Cookie');
     expect(recipeRepository.filteredRecipes).to.be.an('array');
     expect(recipeRepository.filteredRecipes[0]).to.be.an('object');
   });
+
+  it('Should be able to filter recipe by ingredient', () => {
+    recipeRepository.getRecipeByIngredients('salt');
+    expect(recipeRepository.filteredRecipes.length).to.equal(1);
+    expect(recipeRepository.filteredRecipes[0]).to.be.an('object');
+  })
+
 })
