@@ -53,4 +53,8 @@ describe('Recipe', () => {
     recipe.getRecipeCost();
     expect(recipe.totalRecipeCost).to.be.a('number');
   })
+  it('Should return a recipe\'s instructions', () => {
+    recipe.getRecipeInstructions();
+    expect(recipe.instructions).to.be.an('array')
+  })
 })

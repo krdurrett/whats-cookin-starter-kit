@@ -1,6 +1,3 @@
-// const recipeRepository = import { RecipeRepository } from '../src/classes/RecipeRepository';
-// import RecipeRepository from '../src/classes/RecipeRepository'
-
 class Recipe {
   constructor(recipe, ingredientsData) {
     this.id = recipe.id;
@@ -37,13 +34,10 @@ class Recipe {
       }).quantity.amount
       this.totalRecipeCost += ((ingredientCost * ingredientAmount) / 100);
     })
-    console.log('total??? ', this.totalRecipeCost)
     return (this.totalRecipeCost);
-    //For each ingredident name, obtain the ingredient cost from this.allIngredients
-    //AND obtain the ingredient amount from this.ingredients
-    //Multiply those two together
-    //Add all together
-
+  }
+  getRecipeInstructions() {
+    return this.instructions;
   }
 }
 
