@@ -59,6 +59,14 @@ const showRecipeDetails = (event) => {
     recipeRepository.recipes.forEach(recipe => {
       if(event.target.id === recipe.id.toString()) {
         const selectedRecipe = new Recipe(recipe, ingredientsData);
+        let ingredientNames = selectedRecipe.getIngredientNames().reduce((acc, ingredient) => {
+          acc += `<li>${ingredient}</li>`
+          return acc
+        }, ``)
+        let ingredientInstructions = selectedRecipe.getRecipeInstructions().reduce((acc, instruction) => {
+          acc += `<li>${instruction}</li>`
+          return acc
+        }, ``)
         recipeDetailsView.innerHTML = `
         <section class="recipe-header" id="recipeHeader">
           <span>${recipe.name}</span>
@@ -71,15 +79,11 @@ const showRecipeDetails = (event) => {
         <div class= "recipe-details">
           <section class="ingredients">
             <h2>Ingredients</h2>
-            <ul>
-              <li>${selectedRecipe.getIngredientNames()}</li>
-            </ul>
+            <ul>${ingredientNames}</ul>
           </section>
           <section class="instructions">
             <h2>Instructions</h2>
-            <ol>
-              <li>${selectedRecipe.getRecipeInstructions()}</li>
-            </ol>
+            <ol>${ingredientInstructions}</ol>
           </section>
         </div>`
         document.getElementById('recipeHeader').style.backgroundImage = `url(${recipe.image})`

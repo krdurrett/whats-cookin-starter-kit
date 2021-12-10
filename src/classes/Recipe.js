@@ -18,7 +18,13 @@ class Recipe {
       const ingredientName = this.allIngredients.find((ingredient) => {
         return ingredient.id === id
       }).name
-      ingredientNames.push(ingredientName);
+      const ingredientAmount = this.ingredients.find((ingredient) => {
+        return ingredient.id === id
+      }).quantity.amount
+      const ingredientUnit = this.ingredients.find((ingredient) => {
+        return ingredient.id === id
+      }).quantity.unit
+      ingredientNames.push(`${ingredientAmount} ${ingredientUnit} ${ingredientName}`);
     })
     return ingredientNames;
   }
@@ -38,7 +44,7 @@ class Recipe {
   }
   getRecipeInstructions() {
     const instructions = this.instructions.map((instruction) => {
-      return `${instruction.number} ${instruction.instruction}`
+      return `${instruction.instruction}`
     })
     return instructions;
   }
