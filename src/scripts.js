@@ -60,7 +60,7 @@ const showRecipeDetails = (event) => {
       if(event.target.id === recipe.id.toString()) {
         const selectedRecipe = new Recipe(recipe, ingredientsData);
         recipeDetailsView.innerHTML = `
-        <section class="recipe-header">
+        <section class="recipe-header" id="recipeHeader">
           <span>${recipe.name}</span>
           <span>${selectedRecipe.getRecipeCost()}</span>
           <div class="recipe-detail-buttons">
@@ -82,6 +82,7 @@ const showRecipeDetails = (event) => {
             </ol>
           </section>
         </div>`
+        document.getElementById('recipeHeader').style.backgroundImage = `url(${recipe.image})`
       }
     })
   }
