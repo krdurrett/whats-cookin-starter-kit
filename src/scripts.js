@@ -16,6 +16,8 @@ const navFilterButton = document.querySelector('#navFilterButton');
 const filterView = document.querySelector('#filterView');
 const filterViewTags = document.querySelector('#filterViewTags');
 const filterViewButton = document.querySelector('#filterViewButton');
+const searchInput = document.querySelector('#searchInput');
+const searchButton = document.querySelector('#searchButton');
 
 //Global variables
 let recipeRepository;
@@ -65,12 +67,12 @@ const showRecipeDetails = (event) => {
         const selectedRecipe = new Recipe(recipe, ingredientsData);
         let ingredientNames = selectedRecipe.getIngredientNames().reduce((acc, ingredient) => {
           acc += `<li>${ingredient}</li>`
-          return acc
-        }, ``)
+          return acc;
+        }, ``);
         let ingredientInstructions = selectedRecipe.getRecipeInstructions().reduce((acc, instruction) => {
           acc += `<li>${instruction}</li>`
-          return acc
-        }, ``)
+          return acc;
+        }, ``);
         recipeDetailsView.innerHTML = `
         <section class="recipe-header" id="recipeHeader">
           <span>${recipe.name}</span>
@@ -92,7 +94,7 @@ const showRecipeDetails = (event) => {
         </div>`
         document.getElementById('recipeHeader').style.backgroundImage = `url(${recipe.image})`
       }
-    })
+    });
   }
 }
 
@@ -107,20 +109,20 @@ const displayFilterForm = () => {
     <label for="${tag}">${tag}</label>
     </div>
     `
-  })
+  });
 }
 
 const returnUniqueTags = () => {
   instantiateRecipeRepository();
   const uniqueTags = recipeRepository.recipes.flatMap((recipe) => {
-    return recipe.tags
+    return recipe.tags;
     }).reduce((acc, tag) => {
       if (!acc.includes(tag)) {
-        acc.push(tag)
+        acc.push(tag);
       }
-      return acc
-      }, [])
-  return uniqueTags
+      return acc;
+    }, []);
+  return uniqueTags;
 }
 
 const displayRecipeByTag = (event) => {
@@ -145,7 +147,18 @@ const displayFilteredRecipes = () => {
         <button>❤️</button>
       </div>
     </section>`;
-  })
+  });
+}
+
+const displayRecipeBySearchCriteria = () => {
+  recipeRepository.filteredRecipes = [];
+  const searchInputValue = searchInput.value;
+  heading.innerText = `Recipes searched by ${searchInputValue}`;
+  addHidden([landingPageView, filterView, recipeDetailsView]);
+  removeHidden([recipeDisplayView]);
+  recipeRepository.getRecipeByName(searchInputValue);
+  recipeRepository.getRecipeByIngredients(searchInputValue);
+  displayFilteredRecipes();
 }
 
 //Event Listeners
@@ -156,3 +169,4 @@ recipeCardSection.addEventListener('click', event => {
 navFilterButton.addEventListener('click', displayFilterForm);
 filterViewButton.addEventListener('click', event => {
   displayRecipeByTag(event)});
+searchButton.addEventListener('click', displayRecipeBySearchCriteria);
