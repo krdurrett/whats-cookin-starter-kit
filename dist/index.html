@@ -16,7 +16,7 @@
           <button class="search-button" type="submit">Search</button>
         </div>
         <div class="nav-button-container">
-          <button class="nav-buttons">Filter</button>
+          <button class="nav-buttons" id="navFilterButton">Filter</button>
           <button class="nav-buttons">Favorites❤️</button>
           <button class="nav-buttons">To Cook🥘</button>
         </div>
@@ -25,7 +25,7 @@
         <button class="all-recipes-button" id="allRecipesButton">View All Recipes!</button>
       </section>
       <section class="recipe-display-view hidden" id="recipeDisplayView">
-        <h1>User searched criteria/filters or Favorites or To Cook</h1>
+        <h1 id="heading">User searched criteria/filters or Favorites or To Cook</h1>
         <section class="recipe-card-section" id="recipeCardSection">
           <section class="recipe-card">
             <img class="recipe-card-img" src="https://spoonacular.com/recipeImages/595736-556x370.jpg">
@@ -37,8 +37,8 @@
           </section>
         </section>
       </section>
-      <section class="recipe-details-view hidden">
-        <section class="recipe-header">
+      <section class="recipe-details-view hidden" id="recipeDetailsView">
+        <section class="recipe-header" id="recipeHeader">
           <span>Recipe Name</span>
           <span>Recipe Cost</span>
           <div class="recipe-detail-buttons">
@@ -59,12 +59,12 @@
               <li>mix beans</li>
             </ol>
           </section>
-        </div><
+        </div>
       </section>
-      <section class="filter-view hidden">
+      <section class="filter-view hidden" id="filterView">
         <form class="filter-form">
           <h2 class="filter-view-title">Choose options to filter your recipes below</h2>
-          <section class="filter-view-tags">
+          <section class="filter-view-tags" id="filterViewTags">
             <input type="radio" id="beans" name="tag" value="beans">
             <label for="beans">Beans</label>
             <input type="radio" id="beans2" name="tag" value="beans2">

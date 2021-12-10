@@ -14,6 +14,7 @@ const heading = document.querySelector('#heading');
 const recipeDetailsView = document.querySelector('#recipeDetailsView');
 const navFilterButton = document.querySelector('#navFilterButton');
 const filterView = document.querySelector('#filterView');
+const filterViewTags = document.querySelector('#filterViewTags');
 
 //Global variables
 let recipeRepository;
@@ -31,11 +32,10 @@ const removeHidden = elements => {
   })
 }
 
+
 const instantiateRecipeRepository = () => {
   recipeRepository = new RecipeRepository(recipeData, ingredientsData);
 }
-
-
 
 const displayAllRecipes = () => {
   addHidden([landingPageView]);
@@ -98,9 +98,28 @@ const showRecipeDetails = (event) => {
 const displayFilterForm = () => {
   addHidden([landingPageView, recipeDisplayView, recipeDetailsView]);
   removeHidden([filterView]);
+  filterViewTags.innerHTML = '';
+  returnUniqueTags().forEach(tag => {
+    filterViewTags.innerHTML += `
+    <div class="tag-style-div">
+    <input type="radio" id="${tag}" name="tag" value="${tag}">
+    <label for="${tag}">${tag}</label>
+    </div>
+    `
+  })
+}
 
-  // <input type="radio" id="beans" name="tag" value="beans">
-  // <label for="beans">Beans</label>
+const returnUniqueTags = () => {
+  instantiateRecipeRepository();
+  const uniqueTags = recipeRepository.recipes.flatMap((recipe) => {
+    return recipe.tags
+    }).reduce((acc, tag) => {
+      if (!acc.includes(tag)) {
+        acc.push(tag)
+      }
+      return acc
+      }, [])
+  return uniqueTags
 }
 
 //Event Listeners
