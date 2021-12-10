@@ -160,6 +160,13 @@ height: 85%;
   align-self: flex-start;
 }
 
+.ingredients {
+  width: 25%;
+}
+.instructions {
+  width: 75%;
+}
+
 .filter-view {
   display: flex;
   justify-content: center;
@@ -180,9 +187,13 @@ height: 85%;
   text-align: center;
 }
 
+.tag-style-div {
+  display: flex;
+}
+
 .filter-view-tags {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   flex-direction: column;
   flex-wrap: wrap;
   width: 50%;
