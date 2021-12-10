@@ -15,6 +15,7 @@ const recipeDetailsView = document.querySelector('#recipeDetailsView');
 const navFilterButton = document.querySelector('#navFilterButton');
 const filterView = document.querySelector('#filterView');
 const filterViewTags = document.querySelector('#filterViewTags');
+const filterViewButton = document.querySelector('#filterViewButton');
 
 //Global variables
 let recipeRepository;
@@ -122,9 +123,36 @@ const returnUniqueTags = () => {
   return uniqueTags
 }
 
+const displayRecipeByTag = (event) => {
+  event.preventDefault();
+  const selectedTag = document.querySelector('input[name="tag"]:checked').value;
+  addHidden([filterView]);
+  removeHidden([recipeDisplayView]);
+  heading.innerText = `Recipes Filtered by ${selectedTag}`
+  recipeRepository.getRecipeByTag(selectedTag);
+  displayFilteredRecipes();
+}
+
+const displayFilteredRecipes = () => {
+  recipeCardSection.innerHTML = ``;
+  recipeRepository.filteredRecipes.forEach(recipe => {
+    recipeCardSection.innerHTML += `
+    <section class="recipe-card">
+      <img class="recipe-card-img" src="${recipe.image}">
+      <button class="recipe-name-button" id="${recipe.id}" >${recipe.name}</button>
+      <div class="recipe-card-buttons">
+        <button>🥘</button>
+        <button>❤️</button>
+      </div>
+    </section>`;
+  })
+}
+
 //Event Listeners
 window.addEventListener('load', instantiateRecipeRepository);
 allRecipesButton.addEventListener('click', displayAllRecipes);
 recipeCardSection.addEventListener('click', event => {
   showRecipeDetails(event)});
 navFilterButton.addEventListener('click', displayFilterForm);
+filterViewButton.addEventListener('click', event => {
+  displayRecipeByTag(event)});
