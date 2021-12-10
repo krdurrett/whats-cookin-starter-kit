@@ -37,7 +37,10 @@ class Recipe {
     return (this.totalRecipeCost);
   }
   getRecipeInstructions() {
-    return this.instructions;
+    const instructions = this.instructions.map((instruction) => {
+      return `${instruction.number} ${instruction.instruction}`
+    })
+    return instructions;
   }
 }
 
