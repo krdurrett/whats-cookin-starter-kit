@@ -73,7 +73,24 @@ button {
   cursor: pointer;
 }
 
-.search-or-favorites-or-to-cook-view {
+.landing-page-view {
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  border: 2px solid red;
+  height: 90%;
+  width: 30%;
+}
+
+.all-recipes-button {
+  height: 50%;
+  width: 90%;
+  border-radius: 50%;
+  border: none;
+  background-color: rgba(225, 225, 225, .6);
+}
+
+.recipe-display-view {
 border: 2px solid red;
 height: 85%;
 }
