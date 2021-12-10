@@ -12,6 +12,9 @@ const landingPageView = document.querySelector('#landingPageView');
 const recipeDisplayView = document.querySelector('#recipeDisplayView');
 const heading = document.querySelector('#heading');
 const recipeDetailsView = document.querySelector('#recipeDetailsView');
+const navFilterButton = document.querySelector('#navFilterButton');
+const filterView = document.querySelector('#filterView');
+
 //Global variables
 let recipeRepository;
 
@@ -92,8 +95,17 @@ const showRecipeDetails = (event) => {
   }
 }
 
+const displayFilterForm = () => {
+  addHidden([landingPageView, recipeDisplayView, recipeDetailsView]);
+  removeHidden([filterView]);
+
+  // <input type="radio" id="beans" name="tag" value="beans">
+  // <label for="beans">Beans</label>
+}
+
 //Event Listeners
 window.addEventListener('load', instantiateRecipeRepository);
 allRecipesButton.addEventListener('click', displayAllRecipes);
 recipeCardSection.addEventListener('click', event => {
   showRecipeDetails(event)});
+navFilterButton.addEventListener('click', displayFilterForm);

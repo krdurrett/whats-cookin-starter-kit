@@ -40,7 +40,7 @@ class Recipe {
       }).quantity.amount
       this.totalRecipeCost += ((ingredientCost * ingredientAmount) / 100);
     })
-    return (this.totalRecipeCost);
+    return (this.totalRecipeCost.toFixed(2));
   }
   getRecipeInstructions() {
     const instructions = this.instructions.map((instruction) => {
