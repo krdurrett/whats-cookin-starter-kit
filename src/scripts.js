@@ -10,7 +10,8 @@ const allRecipesButton = document.querySelector('#allRecipesButton');
 const recipeCardSection = document.querySelector('#recipeCardSection');
 const landingPageView = document.querySelector('#landingPageView');
 const recipeDisplayView = document.querySelector('#recipeDisplayView');
-
+const heading = document.querySelector('#heading');
+const recipeDetailsView = document.querySelector('#recipeDetailsView');
 //Global variables
 let recipeRepository;
 
@@ -36,23 +37,29 @@ const instantiateRecipeRepository = () => {
 const displayAllRecipes = () => {
   addHidden([landingPageView]);
   removeHidden([recipeDisplayView]);
+  heading.innerText = 'All Recipes'
   recipeCardSection.innerHTML = ``;
   recipeRepository.recipes.forEach(recipe => {
     recipeCardSection.innerHTML += `
     <section class="recipe-card">
       <img class="recipe-card-img" src="${recipe.image}">
-      <button>${recipe.name}</button>
+      <button id="${recipe.id}" >${recipe.name}</button>
       <div class="recipe-card-buttons">
         <button>🥘</button>
         <button>❤️</button>
       </div>
     </section>`;
   })
-
 }
 
-console.log('Hello world');
+const showRecipeDetails = (event) => {
+  addHidden([recipeDisplayView]);
+  removeHidden([recipeDetailsView]);
+  //how to targetEvents by ID;
+}
 
 //Event Listeners
 window.addEventListener('load', instantiateRecipeRepository);
-allRecipesButton.addEventListener('click', displayAllRecipes)
+allRecipesButton.addEventListener('click', displayAllRecipes);
+recipeCardSection.addEventListener('click', event => {
+  showRecipeDetails(event));

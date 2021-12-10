@@ -96,9 +96,12 @@ height: 85%;
 }
 
 .recipe-card-section {
+  display: flex;
+  flex-wrap: wrap;
   border: 2px solid pink;
   width: 100%;
   height: 90%;
+  overflow-y: auto;
 }
 
 .recipe-card {
