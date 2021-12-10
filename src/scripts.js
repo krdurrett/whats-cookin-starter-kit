@@ -43,7 +43,7 @@ const displayAllRecipes = () => {
     recipeCardSection.innerHTML += `
     <section class="recipe-card">
       <img class="recipe-card-img" src="${recipe.image}">
-      <button id="${recipe.id}" >${recipe.name}</button>
+      <button class="recipe-name-button" id="${recipe.id}" >${recipe.name}</button>
       <div class="recipe-card-buttons">
         <button>🥘</button>
         <button>❤️</button>
@@ -53,41 +53,42 @@ const displayAllRecipes = () => {
 }
 
 const showRecipeDetails = (event) => {
-  addHidden([recipeDisplayView]);
-  removeHidden([recipeDetailsView]);
-  recipeRepository.recipe.forEach(recipe => {
-    if(event.target.id === recipe.id) {
-      recipeDetailsView.innerHTML = `
-      <section class="recipe-header">
-        <span>${recipe.name}</span>
-        <span>Recipe Cost</span>
-        <div class="recipe-detail-buttons">
-          <button>🥘</button>
-          <button>❤️</button>
-        </div>
-      </section>
-      <div class= "recipe-details">
-        <section class="ingredients">
-          <h2>Ingredients</h2>
-          <ul>
-            <li>beans</li>
-          </ul>
+  if(event.target.classList.contains('recipe-name-button')){
+    addHidden([recipeDisplayView]);
+    removeHidden([recipeDetailsView]);
+    recipeRepository.recipes.forEach(recipe => {
+      if(event.target.id === recipe.id.toString()) {
+        const selectedRecipe = new Recipe(recipe, ingredientsData);
+        recipeDetailsView.innerHTML = `
+        <section class="recipe-header">
+          <span>${recipe.name}</span>
+          <span>${selectedRecipe.getRecipeCost()}</span>
+          <div class="recipe-detail-buttons">
+            <button>🥘</button>
+            <button>❤️</button>
+          </div>
         </section>
-        <section class="instructions">
-          <h2>Instructions</h2>
-          <ol>
-            <li>mix beans</li>
-          </ol>
-        </section>
-      </div>`
-    }
+        <div class= "recipe-details">
+          <section class="ingredients">
+            <h2>Ingredients</h2>
+            <ul>
+              <li>${selectedRecipe.getIngredientNames()}</li>
+            </ul>
+          </section>
+          <section class="instructions">
+            <h2>Instructions</h2>
+            <ol>
+              <li>${selectedRecipe.getRecipeInstructions()}</li>
+            </ol>
+          </section>
+        </div>`
+      }
+    })
   }
-
-  )
 }
 
 //Event Listeners
 window.addEventListener('load', instantiateRecipeRepository);
 allRecipesButton.addEventListener('click', displayAllRecipes);
 recipeCardSection.addEventListener('click', event => {
-  showRecipeDetails(event));
+  showRecipeDetails(event)});
