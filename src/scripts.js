@@ -55,7 +55,35 @@ const displayAllRecipes = () => {
 const showRecipeDetails = (event) => {
   addHidden([recipeDisplayView]);
   removeHidden([recipeDetailsView]);
-  //how to targetEvents by ID;
+  recipeRepository.recipe.forEach(recipe => {
+    if(event.target.id === recipe.id) {
+      recipeDetailsView.innerHTML = `
+      <section class="recipe-header">
+        <span>${recipe.name}</span>
+        <span>Recipe Cost</span>
+        <div class="recipe-detail-buttons">
+          <button>🥘</button>
+          <button>❤️</button>
+        </div>
+      </section>
+      <div class= "recipe-details">
+        <section class="ingredients">
+          <h2>Ingredients</h2>
+          <ul>
+            <li>beans</li>
+          </ul>
+        </section>
+        <section class="instructions">
+          <h2>Instructions</h2>
+          <ol>
+            <li>mix beans</li>
+          </ol>
+        </section>
+      </div>`
+    }
+  }
+
+  )
 }
 
 //Event Listeners
