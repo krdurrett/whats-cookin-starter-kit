@@ -13,7 +13,7 @@ describe('User', () => {
       recipe = new Recipe(recipes, ingredientsData);
     })
     usersData.forEach(person => {
-      user = new User(person);
+      user = new User(person, ingredientsData);
     });
   });
   it('Should be a function', () => {
@@ -49,6 +49,11 @@ describe('User', () => {
   it('Should be able to filter favorite recipes by name', () => {
     user.addToFavorites(recipe);
     user.getRecipeByName('Maple');
+    expect(user.filteredFavoriteRecipes[0]).to.be.a('object');
+  })
+  it('Should be able to filter favorite recipes by ingredient', () => {
+    user.addToFavorites(recipe);
+    user.getRecipeByIngedients('pork chop');
     expect(user.filteredFavoriteRecipes[0]).to.be.a('object');
   })
 })
