@@ -31,6 +31,12 @@ describe('User', () => {
   });
   it('Should have favorite recipes', () => {
     user.addToFavorites(recipe);
-    expect(user.favoriteRecipes).to.be.a('array')
+    expect(user.favoriteRecipes).to.be.a('array');
+    expect(user.favoriteRecipes.length).to.equal(1);
+  });
+  it('Should be able to add recipes to cook', () => {
+    user.addToRecipesToCook(recipe);
+    expect(user.recipesToCook).to.be.a('array');
+    expect(user.recipesToCook.length).to.equal(1);
   });
 })
