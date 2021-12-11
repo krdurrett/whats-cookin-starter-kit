@@ -26,6 +26,7 @@ const favoritesNavBar = document.querySelector('#favoritesNavBar');
 const navFilterFavoritesButton = document.querySelector('#navFilterFavoritesButton');
 const filterViewTitle = document.querySelector('#filterViewTitle');
 const filterViewButtonContainer = document.querySelector('#filterViewButtonContainer');
+const favoritesNavFavoritesButton = document.querySelector('#favoritesNavFavoritesButton');
 //Global variables
 let recipeRepository;
 let user;
@@ -230,10 +231,39 @@ const removeRecipeFromFavorites = (event) => {
 
 const displayFavoritesFilterView = () => {
   displayFilterForm();
+  console.log('favorites array after clicking filter favorites', user.favoriteRecipes);
   filterViewTitle.innerText = 'Choose options to filter your favorite recipes below';
   filterViewButtonContainer.innerHTML = `
   <button class="filter-view-button" id="favoritesFilterViewButton">Get Recipes</button>
   `
+}
+
+const displayFavoriteRecipesByTag = (event) => {
+  event.preventDefault();
+  addHidden([filterView, landingPageView, recipeDetailsView]);
+  removeHidden([recipeDisplayView]);
+  const selectedTag = document.querySelector('input[name="tag"]:checked').value;
+  heading.innerText = `Favorite Recipes Filtered by ${selectedTag}`
+  user.getFavoriteRecipeByTag(selectedTag);
+  console.log('favorite recipes', user.favoriteRecipes);
+  console.log(typeof(selectedTag));
+  console.log('filtered recipes', user.filteredFavoriteRecipes);
+  displayFavoriteFilteredRecipes();
+}
+
+const displayFavoriteFilteredRecipes = () => {
+  recipeCardSection.innerHTML = ``;
+  user.filteredFavoriteRecipes.forEach(recipe => {
+    recipeCardSection.innerHTML += `
+    <section class="recipe-card">
+      <img class="recipe-card-img" src="${recipe.image}">
+      <button class="recipe-name-button" id="${recipe.id}" >${recipe.name}</button>
+      <div class="recipe-card-buttons">
+        <button class="to-cook-button">🥘</button>
+        <button class="remove-favorite-button" id="${recipe.id}">❌</button>
+      </div>
+    </section>`;
+  })
 }
 
 //Event Listeners
@@ -246,4 +276,6 @@ filterViewButton.addEventListener('click', event => {
   displayRecipeByTag(event)});
 searchButton.addEventListener('click', displayRecipeBySearchCriteria);
 navFavoritesButton.addEventListener('click', displayFavoriteRecipes)
-navFilterFavoritesButton.addEventListener('click', displayFavoritesFilterView)
+navFilterFavoritesButton.addEventListener('click', displayFavoritesFilterView);
+filterViewButtonContainer.addEventListener('click', event => {
+displayFavoriteRecipesByTag(event)});
