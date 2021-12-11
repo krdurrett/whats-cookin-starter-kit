@@ -7,19 +7,35 @@
   </head>
   <body>
     <main>
-      <nav>
-        <div class="home-button-container">
-          <button class="home-button">Whats Cookin</button>
-        </div>
-        <div class="nav-search-bar">
-          <input class="search-input" id="searchInput" type="text" placeholder="Search by recipe name or ingredient"></input>
-          <button class="search-button" id="searchButton" type="submit">Search</button>
-        </div>
-        <div class="nav-button-container">
-          <button class="nav-buttons" id="navFilterButton">Filter</button>
-          <button class="nav-buttons" id="navFavoritesButton">Favorites❤️</button>
-          <button class="nav-buttons" id="navToCookButton">To Cook🥘</button>
-        </div>
+      <nav id="navSection">
+        <section class="home-nav-bar" id="homeNavBar">
+          <div class="home-button-container">
+            <button class="home-button">Whats Cookin</button>
+          </div>
+          <div class="nav-search-bar">
+            <input class="search-input" id="searchInput" type="text" placeholder="Search by recipe name or ingredient"></input>
+            <button class="search-button" id="searchButton" type="submit">Search</button>
+          </div>
+          <div class="nav-button-container">
+            <button class="nav-buttons" id="navFilterButton">Filter</button>
+            <button class="nav-buttons" id="navFavoritesButton">Favorites❤️</button>
+            <button class="nav-buttons" id="navToCookButton">To Cook🥘</button>
+          </div>
+        </section>
+        <section class="favorites-nav-bar hidden" id="favoritesNavBar">
+          <div class="home-button-container">
+            <button class="home-button">Home</button>
+          </div>
+          <div class="nav-search-bar">
+            <input class="search-input" id="searchInput" type="text" placeholder="Search favorites by recipe name or ingredient"></input>
+            <button class="search-button" id="searchFavoritesButton" type="submit">Search Favorites</button>
+          </div>
+          <div class="nav-button-container">
+            <button class="nav-buttons" id="navFilterFavoritesButton">Filter Favorites</button>
+            <button class="nav-buttons" id="navFavoritesButton">Favorites❤️</button>
+            <button class="nav-buttons" id="navToCookButton">To Cook🥘</button>
+          </div>
+        </section>
       </nav>
       <section class="landing-page-view" id="landingPageView">
         <button class="all-recipes-button" id="allRecipesButton">View All Recipes!</button>
