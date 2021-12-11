@@ -46,4 +46,9 @@ describe('User', () => {
     user.getFavoriteRecipeByTag('lunch');
     expect(user.filteredFavoriteRecipes[0]).to.be.a('object');
   })
+  it('Should be able to filter favorite recipes by name', () => {
+    user.addToFavorites(recipe);
+    user.getRecipeByName('Maple');
+    expect(user.filteredFavoriteRecipes[0]).to.be.a('object');
+  })
 })

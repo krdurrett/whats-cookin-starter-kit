@@ -24,6 +24,13 @@ class User {
       }
     })
   }
+  getRecipeByName(searchPhrase) {
+    this.favoriteRecipes.filter(recipe => {
+      if(recipe.name.includes(searchPhrase)) {
+        this.filteredFavoriteRecipes.push(recipe);
+      }
+    })
+  }
 }
 
 
