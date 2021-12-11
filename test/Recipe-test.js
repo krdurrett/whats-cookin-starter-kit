@@ -6,7 +6,7 @@ describe('Recipe', () => {
   let recipe;
   beforeEach(() => {
     recipeData.forEach(recipes => {
-      recipe = new Recipe(recipes);
+      recipe = new Recipe(recipes, ingredientsData);
     })
   });
 
@@ -43,5 +43,17 @@ describe('Recipe', () => {
     expect(recipe.tags.length).to.equal(4);
   });
 
-  it('')
+  it('Should be able to determine the names of ingredients', () => {
+    recipe.getIngredientNames();
+    expect(recipe.getIngredientNames()).to.be.an('array');
+  });
+
+  it('Should be able to calculate the total recipe cost', () => {
+    recipe.getRecipeCost();
+    expect(recipe.totalRecipeCost).to.be.a('number');
+  });
+  it('Should return a recipe\'s instructions', () => {
+    recipe.getRecipeInstructions();
+    expect(recipe.instructions).to.be.an('array')
+  });
 })
