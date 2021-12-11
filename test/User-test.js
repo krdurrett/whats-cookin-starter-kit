@@ -41,6 +41,11 @@ describe('User', () => {
     expect(user.recipesToCook).to.be.a('array');
     expect(user.recipesToCook.length).to.equal(1);
   });
+  it('Should remove favorites from user favorite recipes', () => {
+    user.addToFavorites(recipe);
+    user.removeFromFavorites(recipe);
+    expect(user.favoriteRecipes.length).to.equal(0);
+  });
   it('Should be able to filter favorites', () => {
     user.addToFavorites(recipe);
     user.getFavoriteRecipeByTag('lunch');
@@ -55,10 +60,5 @@ describe('User', () => {
     user.addToFavorites(recipe);
     user.getRecipeByIngedients('pork chop');
     expect(user.filteredFavoriteRecipes[0]).to.be.a('object');
-  });
-  it('Should remove favorites from user favorite recipes', () => {
-    user.addToFavorites(recipe);
-    user.removeFromFavorites(recipe);
-    expect(user.favoriteRecipes.length).to.equal(0);
   });
 })

@@ -13,6 +13,10 @@ class User {
       this.favoriteRecipes.push(recipe)
     }
   }
+  removeFromFavorites(recipe) {
+    const recipeIndex = this.favoriteRecipes.indexOf(recipe)
+    this.favoriteRecipes.splice(recipeIndex, 1);
+  }
   addToRecipesToCook(recipe) {
     if (!this.recipesToCook.includes(recipe)) {
       this.recipesToCook.push(recipe);
@@ -53,10 +57,6 @@ class User {
         }
       })
     })
-  }
-  removeFromFavorites(recipe) {
-    const recipeIndex = this.favoriteRecipes.indexOf(recipe)
-    this.favoriteRecipes.splice(recipeIndex, 1);
   }
 }
 
