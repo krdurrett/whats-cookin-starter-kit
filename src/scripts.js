@@ -23,6 +23,9 @@ const searchButton = document.querySelector('#searchButton');
 const navFavoritesButton = document.querySelector('#navFavoritesButton');
 const navSection = document.querySelector('#navSection');
 const favoritesNavBar = document.querySelector('#favoritesNavBar');
+const navFilterFavoritesButton = document.querySelector('#navFilterFavoritesButton');
+const filterViewTitle = document.querySelector('#filterViewTitle');
+const filterViewButtonContainer = document.querySelector('#filterViewButtonContainer');
 //Global variables
 let recipeRepository;
 let user;
@@ -225,6 +228,14 @@ const removeRecipeFromFavorites = (event) => {
   })
 }
 
+const displayFavoritesFilterView = () => {
+  displayFilterForm();
+  filterViewTitle.innerText = 'Choose options to filter your favorite recipes below';
+  filterViewButtonContainer.innerHTML = `
+  <button class="filter-view-button" id="favoritesFilterViewButton">Get Recipes</button>
+  `
+}
+
 //Event Listeners
 window.addEventListener('load', instantiation);
 allRecipesButton.addEventListener('click', displayAllRecipes);
@@ -235,3 +246,4 @@ filterViewButton.addEventListener('click', event => {
   displayRecipeByTag(event)});
 searchButton.addEventListener('click', displayRecipeBySearchCriteria);
 navFavoritesButton.addEventListener('click', displayFavoriteRecipes)
+navFilterFavoritesButton.addEventListener('click', displayFavoritesFilterView)

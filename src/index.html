@@ -79,14 +79,16 @@
       </section>
       <section class="filter-view hidden" id="filterView">
         <form class="filter-form">
-          <h2 class="filter-view-title">Choose options to filter your recipes below</h2>
+          <h2 class="filter-view-title" id="filterViewTitle">Choose options to filter your recipes below</h2>
           <section class="filter-view-tags" id="filterViewTags">
             <input type="radio" id="beans" name="tag" value="beans">
             <label for="beans">Beans</label>
             <input type="radio" id="beans2" name="tag" value="beans2">
             <label for="beans2">Beans2</label>
           </section>
-          <button class="filter-view-button" id="filterViewButton">Get Recipes</button>
+          <section id="filterViewButtonContainer">
+            <button class="filter-view-button" id="filterViewButton">Get Recipes</button>
+          </section>
         </form>
       </section>
     </main>
