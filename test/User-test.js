@@ -45,15 +45,20 @@ describe('User', () => {
     user.addToFavorites(recipe);
     user.getFavoriteRecipeByTag('lunch');
     expect(user.filteredFavoriteRecipes[0]).to.be.a('object');
-  })
+  });
   it('Should be able to filter favorite recipes by name', () => {
     user.addToFavorites(recipe);
     user.getRecipeByName('Maple');
     expect(user.filteredFavoriteRecipes[0]).to.be.a('object');
-  })
+  });
   it('Should be able to filter favorite recipes by ingredient', () => {
     user.addToFavorites(recipe);
     user.getRecipeByIngedients('pork chop');
     expect(user.filteredFavoriteRecipes[0]).to.be.a('object');
-  })
+  });
+  it('Should remove favorites from user favorite recipes', () => {
+    user.addToFavorites(recipe);
+    user.removeFromFavorites(recipe);
+    expect(user.favoriteRecipes.length).to.equal(0);
+  });
 })

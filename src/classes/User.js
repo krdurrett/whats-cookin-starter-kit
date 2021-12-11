@@ -54,6 +54,10 @@ class User {
       })
     })
   }
+  removeFromFavorites(recipe) {
+    const recipeIndex = this.favoriteRecipes.indexOf(recipe)
+    this.favoriteRecipes.splice(recipeIndex, 1);
+  }
 }
 
 
