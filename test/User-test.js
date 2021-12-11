@@ -10,28 +10,27 @@ describe('User', () => {
 
   beforeEach(() => {
     recipe = new Recipe(recipeData, ingredientsData);
-    usersData.forEach(user => {
-      user = new User(user);
+    usersData.forEach(person => {
+      user = new User(person);
     });
   });
   it('Should be a function', () => {
-    console.log('user?', user)
-    console.log('recipe?????', recipe)
-    expect(user).to.be.a('function');
-  })
+    expect(User).to.be.a('function');
+  });
   it('Should instantiate a new instance of User', () => {
     expect(user).to.be.an.instanceOf(User);
   });
   it('Should store a name', () => {
     expect(user.name).to.equal('Ephraim Goyette');
-  })
+  });
   it('Should have an id', () => {
     expect(user.id).to.equal(2);
-  })
+  });
   it('Should have a pantry', () => {
     expect(user.pantry).to.be.an('array');
-  })
-  // it('Should have favorite recipes', () => {
-  //   expect(user.favoriteRecipes).to.equal()
-  // })
+  });
+  it('Should have favorite recipes', () => {
+    user.addToFavorites(recipe);
+    expect(user.favoriteRecipes).to.be.a('array')
+  });
 })
