@@ -9,7 +9,9 @@ describe('User', () => {
   let user;
 
   beforeEach(() => {
-    recipe = new Recipe(recipeData, ingredientsData);
+    recipeData.forEach(recipes => {
+      recipe = new Recipe(recipes, ingredientsData);
+    })
     usersData.forEach(person => {
       user = new User(person);
     });
@@ -39,4 +41,9 @@ describe('User', () => {
     expect(user.recipesToCook).to.be.a('array');
     expect(user.recipesToCook.length).to.equal(1);
   });
+  it('Should be able to filter favorites', () => {
+    user.addToFavorites(recipe);
+    user.getFavoriteRecipeByTag('lunch');
+    expect(user.filteredFavoriteRecipes[0]).to.be.a('object');
+  })
 })

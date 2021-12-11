@@ -5,6 +5,7 @@ class User {
     this.pantry = usersData.pantry;
     this.favoriteRecipes = [];
     this.recipesToCook = [];
+    this.filteredFavoriteRecipes = [];
   }
   addToFavorites(recipe) {
     if (!this.favoriteRecipes.includes(recipe)) {
@@ -15,6 +16,13 @@ class User {
     if (!this.recipesToCook.includes(recipe)) {
       this.recipesToCook.push(recipe);
     }
+  }
+  getFavoriteRecipeByTag(tag) {
+    this.favoriteRecipes.filter(recipe => {
+      if (recipe.tags.includes(tag)) {
+        this.filteredFavoriteRecipes.push(recipe);
+      }
+    })
   }
 }
 
