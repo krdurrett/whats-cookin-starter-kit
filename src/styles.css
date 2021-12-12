@@ -7,10 +7,14 @@ html {
 }
 
 body {
-  background-image: url("./images/landing_page_bg.jpg");
+  background-image: url("https://spoonacular.com/recipeImages/595736-556x370.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   margin: 0;
+}
+
+.glide {
+  width: 10%;
 }
 
 main {
