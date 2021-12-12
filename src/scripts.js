@@ -51,8 +51,8 @@ const displayAllRecipes = () => {
       <img class="recipe-card-img" src="${recipe.image}">
       <button class="recipe-name-button" id="${recipe.id}" >${recipe.name}</button>
       <div class="recipe-card-buttons">
-        <button>🥘</button>
-        <button>❤️</button>
+        <button class="recipe-card-to-cook-button">🥘</button>
+        <button class="recipe-card-favorite-button">❤️</button>
       </div>
     </section>`;
   })
@@ -143,8 +143,8 @@ const displayFilteredRecipes = () => {
       <img class="recipe-card-img" src="${recipe.image}">
       <button class="recipe-name-button" id="${recipe.id}" >${recipe.name}</button>
       <div class="recipe-card-buttons">
-        <button>🥘</button>
-        <button>❤️</button>
+        <button class="recipe-card-to-cook-button">🥘</button>
+        <button class="recipe-card-favorite-button">❤️</button>
       </div>
     </section>`;
   });
