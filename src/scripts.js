@@ -27,6 +27,8 @@ const navFilterFavoritesButton = document.querySelector('#navFilterFavoritesButt
 const filterViewTitle = document.querySelector('#filterViewTitle');
 const filterViewButtonContainer = document.querySelector('#filterViewButtonContainer');
 const favoritesNavFavoritesButton = document.querySelector('#favoritesNavFavoritesButton');
+const favoritesFilterViewButton =  document.querySelector('#favoritesFilterViewButton');
+
 //Global variables
 let recipeRepository;
 let user;
@@ -127,7 +129,6 @@ const displayFilterForm = () => {
 }
 
 const returnUniqueTags = () => {
-  instantiation();
   const uniqueTags = recipeRepository.recipes.flatMap((recipe) => {
     return recipe.tags;
     }).reduce((acc, tag) => {
@@ -142,7 +143,7 @@ const returnUniqueTags = () => {
 const displayRecipeByTag = (event) => {
   event.preventDefault();
   const selectedTag = document.querySelector('input[name="tag"]:checked').value;
-  addHidden([filterView]);
+  addHidden([filterView, landingPageView, recipeDetailsView]);
   removeHidden([recipeDisplayView]);
   heading.innerText = `Recipes Filtered by ${selectedTag}`
   recipeRepository.getRecipeByTag(selectedTag);
@@ -230,12 +231,10 @@ const removeRecipeFromFavorites = (event) => {
 }
 
 const displayFavoritesFilterView = () => {
+  addHidden([filterViewButton]);
+  removeHidden([favoritesFilterViewButton]);
   displayFilterForm();
-  console.log('favorites array after clicking filter favorites', user.favoriteRecipes);
   filterViewTitle.innerText = 'Choose options to filter your favorite recipes below';
-  filterViewButtonContainer.innerHTML = `
-  <button class="filter-view-button" id="favoritesFilterViewButton">Get Recipes</button>
-  `
 }
 
 const displayFavoriteRecipesByTag = (event) => {
@@ -245,9 +244,6 @@ const displayFavoriteRecipesByTag = (event) => {
   const selectedTag = document.querySelector('input[name="tag"]:checked').value;
   heading.innerText = `Favorite Recipes Filtered by ${selectedTag}`
   user.getFavoriteRecipeByTag(selectedTag);
-  console.log('favorite recipes', user.favoriteRecipes);
-  console.log(typeof(selectedTag));
-  console.log('filtered recipes', user.filteredFavoriteRecipes);
   displayFavoriteFilteredRecipes();
 }
 
@@ -268,14 +264,21 @@ const displayFavoriteFilteredRecipes = () => {
 
 //Event Listeners
 window.addEventListener('load', instantiation);
+
 allRecipesButton.addEventListener('click', displayAllRecipes);
+
 recipeCardSection.addEventListener('click', event => {
   determineButtonAction(event)});
+
 navFilterButton.addEventListener('click', displayFilterForm);
+
 filterViewButton.addEventListener('click', event => {
   displayRecipeByTag(event)});
+
 searchButton.addEventListener('click', displayRecipeBySearchCriteria);
+
 navFavoritesButton.addEventListener('click', displayFavoriteRecipes)
+
 navFilterFavoritesButton.addEventListener('click', displayFavoritesFilterView);
-filterViewButtonContainer.addEventListener('click', event => {
+favoritesFilterViewButton.addEventListener('click', event => {
 displayFavoriteRecipesByTag(event)});
