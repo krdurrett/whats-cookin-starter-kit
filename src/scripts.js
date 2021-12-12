@@ -7,6 +7,15 @@ import recipeData from './data/recipes';
 import ingredientsData from './data/ingredients';
 import usersData from './data/users';
 
+import { fetchAllUsers } from './apiCalls';
+
+const fetchAll = () => {
+  Promise.all([fetchAllUsers()])
+    .then(data => {
+      user = new User(getRandomElement(data[0]), ingredientsData)
+    })
+}
+
 //Query Selectors
 const allRecipesButton = document.querySelector('#allRecipesButton');
 const recipeCardSection = document.querySelector('#recipeCardSection');
@@ -316,7 +325,7 @@ const returnToHomePage = () => {
 }
 
 //Event Listeners
-window.addEventListener('load', instantiation);
+window.addEventListener('load', fetchAll);
 
 allRecipesButton.addEventListener('click', displayAllRecipes);
 
