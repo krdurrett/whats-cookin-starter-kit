@@ -3,6 +3,8 @@ import RecipeRepository from './classes/RecipeRepository';
 import Recipe from './classes/Recipe';
 import User from './classes/User';
 import { fetchAllUsers, fetchAllRecipes, fetchAllIngredients } from './apiCalls';
+import Glide from '@glidejs/glide'
+
 
 
 //Query Selectors
@@ -38,8 +40,11 @@ const favoriteNavToCookButton = document.querySelector('#favoriteNavToCookButton
 let recipeRepository;
 let user;
 let ingredientsData;
+let glide;
 
 //Funtions
+glide = new Glide('.glide').mount()
+
 const fetchAll = () => {
   Promise.all([fetchAllUsers(), fetchAllRecipes(), fetchAllIngredients()])
   .then(data => {

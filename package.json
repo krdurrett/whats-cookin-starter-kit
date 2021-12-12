@@ -25,5 +25,8 @@
     "lint": "./node_modules/.bin/eslint 'src/**.js' 'test/**.js'"
   },
   "author": "Turing School of Software and Design",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "@glidejs/glide": "^3.5.2"
+  }
 }
