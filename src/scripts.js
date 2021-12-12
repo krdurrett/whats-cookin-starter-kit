@@ -1,18 +1,23 @@
 import './styles.css';
-import apiCalls from './apiCalls';
+// import apiCalls from './apiCalls';
 import RecipeRepository from './classes/RecipeRepository';
 import Recipe from './classes/Recipe';
 import User from './classes/User';
-import recipeData from './data/recipes';
-import ingredientsData from './data/ingredients';
-import usersData from './data/users';
+// import recipeData from './data/recipes';
+// import ingredientsData from './data/ingredients';
+// import usersData from './data/users';
 
-import { fetchAllUsers } from './apiCalls';
+import { fetchAllUsers, fetchAllRecipes, fetchAllIngredients } from './apiCalls';
 
 const fetchAll = () => {
-  Promise.all([fetchAllUsers()])
+  Promise.all([fetchAllUsers(), fetchAllRecipes(), fetchAllIngredients()])
     .then(data => {
-      user = new User(getRandomElement(data[0]), ingredientsData)
+      user = new User(getRandomElement(data[0]), data[2])
+      recipeRepository = new RecipeRepository(data[1], data[2])
+      ingredientsData = data[2];
+      console.log('user', user)
+      console.log('recipe repository', recipeRepository)
+      console.log('ingredientsData', ingredientsData)
     })
 }
 
@@ -48,6 +53,7 @@ const favoriteNavToCookButton = document.querySelector('#favoriteNavToCookButton
 //Global variables
 let recipeRepository;
 let user;
+let ingredientsData;
 
 //Funtions
 const addHidden = elements => {
@@ -67,10 +73,10 @@ const getRandomElement = array => {
   return array[randomIndex];
 }
 
-const instantiation = () => {
-  recipeRepository = new RecipeRepository(recipeData, ingredientsData);
-  user = new User(getRandomElement(usersData), ingredientsData);
-}
+// const instantiation = () => {
+//   recipeRepository = new RecipeRepository(recipeData, ingredientsData);
+//   user = new User(getRandomElement(usersData), ingredientsData);
+// }
 
 const displayAllRecipes = () => {
   addHidden([landingPageView]);
