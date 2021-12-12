@@ -7,7 +7,7 @@ html {
 }
 
 body {
-  background-image: url("https://spoonacular.com/recipeImages/595736-556x370.jpg");
+  background-image: url("./images/landing_page_bg.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   margin: 0;
@@ -82,6 +82,7 @@ button {
   display: flex;
   flex-direction: column;
   justify-content: end;
+  padding: 2%;
   height: 90%;
   width: 30%;
 }
@@ -92,6 +93,7 @@ button {
   border-radius: 50%;
   border: none;
   background-color: rgba(225, 225, 225, .6);
+  font-size: 25px;
 }
 
 .recipe-display-view {
@@ -101,6 +103,7 @@ button {
 .recipe-card-section {
   display: flex;
   flex-wrap: wrap;
+  padding-left: 10%;
   width: 100%;
   height: 90%;
   overflow-y: auto;
@@ -109,20 +112,42 @@ button {
 .recipe-card {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  width: 15%;
-  height: 50%;
+  background-color: #f3f6f4;
+  box-shadow: 1px 1px 1px #444444;
+  margin: 20px;
+  width: 17%;
+  height: 45%;
 }
 
 .recipe-card-img {
   width: auto;
-  height: 40%;
+  height: 60%;
+
+}
+
+.recipe-name-button {
+  border: 1px solid #bcbcbc;
+  box-shadow: 0px 2px 2px #999999;
+  height: 20%;
+  margin: 0;
+  padding: 0;
 }
 
 .recipe-card-buttons {
   display: flex;
   justify-content: space-between;
+  margin-top: 15px;
+  height: 15%;
   width: 100%;
+  padding: 10px;
+}
+
+.to-cook-button,
+.add-favorite-button,
+.remove-favorite-button {
+  box-shadow: 0px 2px 2px #999999;
+  border: 1px solid #bcbcbc;
+  border-radius: 50%;
 }
 
 .recipe-details-view {
@@ -190,6 +215,9 @@ button {
 
 .tag-style-div {
   display: flex;
+  font-size: 20px;
+  height: 10%;
+  width: 50%;
 }
 
 .filter-view-tags {
