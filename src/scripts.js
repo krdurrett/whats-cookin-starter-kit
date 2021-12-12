@@ -34,6 +34,8 @@ const navToCookButton = document.querySelector('#navToCookButton');
 const homeButton = document.querySelector('#homeButton');
 const favoritesHomeButton = document.querySelector('#favoritesHomeButton');
 const homeNavBar = document.querySelector('#homeNavBar');
+const favoriteNavToCookButton = document.querySelector('#favoriteNavToCookButton');
+
 //Global variables
 let recipeRepository;
 let user;
@@ -286,7 +288,6 @@ const addToToCook = (event) => {
       user.addToRecipesToCook(recipe);
     }
   })
-  console.log(user.recipesToCook);
 }
 
 const displayRecipesToCook = () => {
@@ -311,6 +312,7 @@ const displayRecipesToCook = () => {
 const returnToHomePage = () => {
   addHidden([filterView, recipeDetailsView, recipeDisplayView, favoritesNavBar]);
   removeHidden([landingPageView, homeNavBar]);
+  homeButton.innerText = 'What\'s Cookin'
 }
 
 //Event Listeners
@@ -342,3 +344,7 @@ navToCookButton.addEventListener('click', displayRecipesToCook);
 homeButton.addEventListener('click', returnToHomePage);
 
 favoritesHomeButton.addEventListener('click', returnToHomePage);
+
+favoritesNavFavoritesButton.addEventListener('click', displayFavoriteRecipes);
+
+favoriteNavToCookButton.addEventListener('click', displayRecipesToCook);
