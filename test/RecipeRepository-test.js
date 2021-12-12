@@ -4,8 +4,10 @@ import { recipeData, ingredientsData } from '../src/data/recipes-test';
 
 describe('RecipeRepository', () => {
   let recipeRepository;
+  let recipeRepository1;
   beforeEach(() => {
     recipeRepository = new RecipeRepository(recipeData, ingredientsData);
+    recipeRepository1 = new RecipeRepository();
   });
 
   it('Should be a function', () => {
@@ -18,14 +20,22 @@ describe('RecipeRepository', () => {
 
   it('Should be able to store an array of recipes', () => {
     expect(recipeRepository.recipes).to.be.an('array');
-    // expect(recipeRepository.recipes[0].name)to.deep.equal('Loaded Chocolate Chip Pudding Cookie Cups');
+    expect(recipeRepository.recipes).to.deep.equal(recipeData);
+    expect(recipeRepository1.recipes).to.equal(undefined);
   });
+
+  it('Should be able to store an array of ingredients', () => {
+    expect(recipeRepository.ingredients).to.be.an('array');
+    expect(recipeRepository.ingredients).to.deep.equal(ingredientsData);
+    expect(recipeRepository1.ingredients).to.equal(undefined);
+  })
 
   it('Should be able to filter recipes by one or more tags', () => {
     recipeRepository.getRecipeByTag('snack');
 
     expect(recipeRepository.filteredRecipes).to.be.an('array');
     expect(recipeRepository.filteredRecipes[0]).to.be.an('object');
+
   });
 
   it('Should be able to filter recipes by name', () => {

@@ -4,10 +4,11 @@ import { recipeData, ingredientsData } from '../src/data/recipes-test';
 
 describe('Recipe', () => {
   let recipe;
+  let recipe1;
   beforeEach(() => {
-    recipeData.forEach(recipes => {
-      recipe = new Recipe(recipes, ingredientsData);
-    })
+    recipe = new Recipe(recipeData[1], ingredientsData);
+
+    recipe1 = new Recipe({}, []);
   });
 
   it('Should be a function', () => {
@@ -20,27 +21,33 @@ describe('Recipe', () => {
 
   it('Should have an id', () => {
     expect(recipe.id).to.equal(678353);
+    expect(recipe1.id).to.equal(undefined);
   });
 
   it('Should have an image', () => {
     expect(recipe.image).to.equal('https://spoonacular.com/recipeImages/678353-556x370.jpg');
+    expect(recipe1.image).to.equal(undefined);
   });
 
   it('Should have ingredients', () => {
     expect(recipe.ingredients).to.be.an('array');
     expect(recipe.ingredients.length).to.equal(12);
+    expect(recipe1.ingredients).to.equal(undefined);
   });
 
   it('Should have instructions', () => {
     expect(recipe.instructions.length).to.equal(1);
+    expect(recipe1.instructions).to.equal(undefined);
   });
 
   it('Should have a name', () => {
     expect(recipe.name).to.equal('Maple Dijon Apple Cider Grilled Pork Chops');
+    expect(recipe1.name).to.equal(undefined);
   });
 
   it('Should have tags', () => {
     expect(recipe.tags.length).to.equal(4);
+    expect(recipe1.tags).to.equal(undefined);
   });
 
   it('Should be able to determine the names of ingredients', () => {
