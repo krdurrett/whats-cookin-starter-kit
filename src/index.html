@@ -7,19 +7,35 @@
   </head>
   <body>
     <main>
-      <nav>
-        <div class="home-button-container">
-          <button class="home-button">Whats Cookin</button>
-        </div>
-        <div class="nav-search-bar">
-          <input class="search-input" id="searchInput" type="text" placeholder="Search by recipe name or ingredient"></input>
-          <button class="search-button" id="searchButton" type="submit">Search</button>
-        </div>
-        <div class="nav-button-container">
-          <button class="nav-buttons" id="navFilterButton">Filter</button>
-          <button class="nav-buttons">Favorites❤️</button>
-          <button class="nav-buttons">To Cook🥘</button>
-        </div>
+      <nav id="navSection">
+        <section class="home-nav-bar" id="homeNavBar">
+          <div class="home-button-container">
+            <button class="home-button">Whats Cookin</button>
+          </div>
+          <div class="nav-search-bar">
+            <input class="search-input" id="searchInput" type="text" placeholder="Search by recipe name or ingredient"></input>
+            <button class="search-button" id="searchButton" type="submit">Search</button>
+          </div>
+          <div class="nav-button-container">
+            <button class="nav-buttons" id="navFilterButton">Filter</button>
+            <button class="nav-buttons" id="navFavoritesButton">Favorites❤️</button>
+            <button class="nav-buttons" id="navToCookButton">To Cook🥘</button>
+          </div>
+        </section>
+        <section class="favorites-nav-bar hidden" id="favoritesNavBar">
+          <div class="home-button-container">
+            <button class="home-button">Home</button>
+          </div>
+          <div class="nav-search-bar">
+            <input class="search-input" id="favoriteSearchInput" type="text" placeholder="Search favorites by recipe name or ingredient"></input>
+            <button class="search-button" id="searchFavoritesButton" type="submit">Search Favorites</button>
+          </div>
+          <div class="nav-button-container">
+            <button class="nav-buttons" id="navFilterFavoritesButton">Filter Favorites</button>
+            <button class="nav-buttons" id="favoritesNavFavoritesButton">Favorites❤️</button>
+            <button class="nav-buttons" id="navToCookButton">To Cook🥘</button>
+          </div>
+        </section>
       </nav>
       <section class="landing-page-view" id="landingPageView">
         <button class="all-recipes-button" id="allRecipesButton">View All Recipes!</button>
@@ -63,14 +79,17 @@
       </section>
       <section class="filter-view hidden" id="filterView">
         <form class="filter-form">
-          <h2 class="filter-view-title">Choose options to filter your recipes below</h2>
+          <h2 class="filter-view-title" id="filterViewTitle">Choose options to filter your recipes below</h2>
           <section class="filter-view-tags" id="filterViewTags">
             <input type="radio" id="beans" name="tag" value="beans">
             <label for="beans">Beans</label>
             <input type="radio" id="beans2" name="tag" value="beans2">
             <label for="beans2">Beans2</label>
           </section>
-          <button class="filter-view-button" id="filterViewButton">Get Recipes</button>
+          <section id="filterViewButtonContainer">
+            <button class="filter-view-button" id="filterViewButton">Get Recipes</button>
+            <button class="filter-view-button hidden" id="favoritesFilterViewButton">Get Recipes</button>
+          </section>
         </form>
       </section>
     </main>
