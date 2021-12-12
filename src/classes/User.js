@@ -36,7 +36,7 @@ class User {
       }
     })
   }
-  getRecipeByIngedients(searchPhrase) {
+  getRecipeByIngredients(searchPhrase) {
     const filteredIngredients = this.ingredients.filter(ingredient => {
       return ingredient.name.includes(searchPhrase)
     });

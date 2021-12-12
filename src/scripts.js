@@ -28,6 +28,8 @@ const filterViewTitle = document.querySelector('#filterViewTitle');
 const filterViewButtonContainer = document.querySelector('#filterViewButtonContainer');
 const favoritesNavFavoritesButton = document.querySelector('#favoritesNavFavoritesButton');
 const favoritesFilterViewButton =  document.querySelector('#favoritesFilterViewButton');
+const searchFavoritesButton = document.querySelector('#searchFavoritesButton');
+const favoriteSearchInput = document.querySelector('#favoriteSearchInput')
 
 //Global variables
 let recipeRepository;
@@ -73,8 +75,6 @@ const displayAllRecipes = () => {
     </section>`;
   })
 }
-
-
 
 const showRecipeDetails = (event) => {
   addHidden([recipeDisplayView]);
@@ -262,6 +262,18 @@ const displayFavoriteFilteredRecipes = () => {
   })
 }
 
+const displayFavoriteRecipesBySearchCriteria = () => {
+  user.filteredFavoriteRecipes = [];
+  const favoriteSearchInputValue = favoriteSearchInput.value;
+  console.log('search input', favoriteSearchInput.value);
+  heading.innerText = `Favorite recipes searched by ${favoriteSearchInputValue}`;
+  addHidden([landingPageView, filterView, recipeDetailsView]);
+  removeHidden([recipeDisplayView]);
+  user.getRecipeByName(favoriteSearchInputValue);
+  user.getRecipeByIngredients(favoriteSearchInputValue);
+  displayFavoriteFilteredRecipes();
+}
+
 //Event Listeners
 window.addEventListener('load', instantiation);
 
@@ -280,5 +292,8 @@ searchButton.addEventListener('click', displayRecipeBySearchCriteria);
 navFavoritesButton.addEventListener('click', displayFavoriteRecipes)
 
 navFilterFavoritesButton.addEventListener('click', displayFavoritesFilterView);
+
 favoritesFilterViewButton.addEventListener('click', event => {
 displayFavoriteRecipesByTag(event)});
+
+searchFavoritesButton.addEventListener('click', displayFavoriteRecipesBySearchCriteria);
