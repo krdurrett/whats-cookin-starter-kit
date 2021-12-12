@@ -29,7 +29,12 @@ const filterViewButtonContainer = document.querySelector('#filterViewButtonConta
 const favoritesNavFavoritesButton = document.querySelector('#favoritesNavFavoritesButton');
 const favoritesFilterViewButton =  document.querySelector('#favoritesFilterViewButton');
 const searchFavoritesButton = document.querySelector('#searchFavoritesButton');
-const favoriteSearchInput = document.querySelector('#favoriteSearchInput')
+const favoriteSearchInput = document.querySelector('#favoriteSearchInput');
+const navToCookButton = document.querySelector('#navToCookButton');
+const homeButton = document.querySelector('#homeButton');
+const favoritesHomeButton = document.querySelector('#favoritesHomeButton');
+const homeNavBar = document.querySelector('#homeNavBar');
+const favoriteNavToCookButton = document.querySelector('#favoriteNavToCookButton');
 
 //Global variables
 let recipeRepository;
@@ -69,7 +74,7 @@ const displayAllRecipes = () => {
       <img class="recipe-card-img" src="${recipe.image}">
       <button class="recipe-name-button" id="${recipe.id}" >${recipe.name}</button>
       <div class="recipe-card-buttons">
-        <button class="to-cook-button">🥘</button>
+        <button class="to-cook-button" id="${recipe.id}">🥘</button>
         <button class="add-favorite-button" id="${recipe.id}">❤️</button>
       </div>
     </section>`;
@@ -95,7 +100,7 @@ const showRecipeDetails = (event) => {
         <span>${recipe.name}</span>
         <span>${selectedRecipe.getRecipeCost()}</span>
         <div class="recipe-detail-buttons">
-          <button class="to-cook-button">🥘</button>
+          <button class="to-cook-button" id="${recipe.id}">🥘</button>
           <button class="add-favorite-button" id="${recipe.id}">❤️</button>
         </div>
       </section>
@@ -158,7 +163,7 @@ const displayFilteredRecipes = () => {
       <img class="recipe-card-img" src="${recipe.image}">
       <button class="recipe-name-button" id="${recipe.id}" >${recipe.name}</button>
       <div class="recipe-card-buttons">
-        <button class="to-cook-button">🥘</button>
+        <button class="to-cook-button" id="${recipe.id}">🥘</button>
         <button class="add-favorite-button" id="${recipe.id}">❤️</button>
       </div>
     </section>`;
@@ -187,6 +192,9 @@ const determineButtonAction = (event) => {
     removeRecipeFromFavorites(event);
     displayFavoriteRecipes();
   }
+  if(event.target.classList.contains('to-cook-button')) {
+    addToToCook(event);
+  }
 }
 
 const addRecipeToFavorites = (event) => {
@@ -209,7 +217,7 @@ const displayFavoriteRecipes = () => {
       <img class="recipe-card-img" src="${recipe.image}">
       <button class="recipe-name-button" id="${recipe.id}" >${recipe.name}</button>
       <div class="recipe-card-buttons">
-        <button class="to-cook-button">🥘</button>
+        <button class="to-cook-button" id="${recipe.id}">🥘</button>
         <button class="remove-favorite-button" id="${recipe.id}">❌</button>
       </div>
     </section>`;
@@ -255,7 +263,7 @@ const displayFavoriteFilteredRecipes = () => {
       <img class="recipe-card-img" src="${recipe.image}">
       <button class="recipe-name-button" id="${recipe.id}" >${recipe.name}</button>
       <div class="recipe-card-buttons">
-        <button class="to-cook-button">🥘</button>
+        <button class="to-cook-button" id="${recipe.id}">🥘</button>
         <button class="remove-favorite-button" id="${recipe.id}">❌</button>
       </div>
     </section>`;
@@ -272,6 +280,39 @@ const displayFavoriteRecipesBySearchCriteria = () => {
   user.getRecipeByName(favoriteSearchInputValue);
   user.getRecipeByIngredients(favoriteSearchInputValue);
   displayFavoriteFilteredRecipes();
+}
+
+const addToToCook = (event) => {
+  recipeRepository.recipes.forEach(recipe => {
+    if(event.target.id === recipe.id.toString()) {
+      user.addToRecipesToCook(recipe);
+    }
+  })
+}
+
+const displayRecipesToCook = () => {
+  addHidden([landingPageView, filterView, recipeDetailsView]);
+  removeHidden([recipeDisplayView]);
+  heading.innerText = 'Recipes To Cook';
+  homeButton.innerText = 'Home';
+  recipeCardSection.innerHTML = ``;
+  user.recipesToCook.forEach(recipe => {
+    recipeCardSection.innerHTML += `
+    <section class="recipe-card">
+      <img class="recipe-card-img" src="${recipe.image}">
+      <button class="recipe-name-button" id="${recipe.id}" >${recipe.name}</button>
+      <div class="recipe-card-buttons">
+        <button class="to-cook-button" id="${recipe.id}">🥘</button>
+        <button class="add-favorite-button" id="${recipe.id}">❤️</button>
+      </div>
+    </section>`;
+  })
+}
+
+const returnToHomePage = () => {
+  addHidden([filterView, recipeDetailsView, recipeDisplayView, favoritesNavBar]);
+  removeHidden([landingPageView, homeNavBar]);
+  homeButton.innerText = 'What\'s Cookin'
 }
 
 //Event Listeners
@@ -297,3 +338,13 @@ favoritesFilterViewButton.addEventListener('click', event => {
 displayFavoriteRecipesByTag(event)});
 
 searchFavoritesButton.addEventListener('click', displayFavoriteRecipesBySearchCriteria);
+
+navToCookButton.addEventListener('click', displayRecipesToCook);
+
+homeButton.addEventListener('click', returnToHomePage);
+
+favoritesHomeButton.addEventListener('click', returnToHomePage);
+
+favoritesNavFavoritesButton.addEventListener('click', displayFavoriteRecipes);
+
+favoriteNavToCookButton.addEventListener('click', displayRecipesToCook);
