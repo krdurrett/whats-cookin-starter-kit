@@ -19,7 +19,6 @@ class RecipeRepository {
     })
   }
   getRecipeByIngredients(searchPhrase) {
-    console.log('inside get recipe by ingredients', this);
     const filteredIngredients = this.ingredients.filter(ingredient => {
       if(ingredient.name === undefined) {
         return

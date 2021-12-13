@@ -44,11 +44,8 @@ const fetchAll = () => {
   Promise.all([fetchAllUsers(), fetchAllRecipes(), fetchAllIngredients()])
   .then(data => {
     user = new User(getRandomElement(data[0]), data[2])
-    console.log('>>>>>>>>', data)
     recipeRepository = new RecipeRepository(data[1], data[2])
     ingredientsData = data[2];
-    console.log(data[2]);
-    console.log(recipeRepository);
   })
 }
 
@@ -104,11 +101,7 @@ const showRecipeDetails = (event) => {
       recipeDetailsView.innerHTML = `
       <section class="recipe-header" id="recipeHeader">
         <span>${recipe.name}</span>
-        <span>${selectedRecipe.getRecipeCost()}</span>
-        <div class="recipe-detail-buttons">
-          <button class="to-cook-button" id="${recipe.id}">🥘</button>
-          <button class="add-favorite-button" id="${recipe.id}">❤️</button>
-        </div>
+        <span>$${selectedRecipe.getRecipeCost()}</span>
       </section>
       <div class= "recipe-details">
         <section class="ingredients">
@@ -182,7 +175,6 @@ const displayRecipeBySearchCriteria = () => {
   heading.innerText = `Recipes searched by ${searchInputValue}`;
   addHidden([landingPageView, filterView, recipeDetailsView]);
   removeHidden([recipeDisplayView]);
-  console.log('recRepo inside display recipe by search cirteria', recipeRepository);
   recipeRepository.getRecipeByName(searchInputValue);
   recipeRepository.getRecipeByIngredients(searchInputValue);
   displayFilteredRecipes();
@@ -280,7 +272,6 @@ const displayFavoriteFilteredRecipes = () => {
 const displayFavoriteRecipesBySearchCriteria = () => {
   user.filteredFavoriteRecipes = [];
   const favoriteSearchInputValue = favoriteSearchInput.value.toLowerCase();
-  console.log('search input', favoriteSearchInput.value);
   heading.innerText = `Favorite recipes searched by ${favoriteSearchInputValue}`;
   addHidden([landingPageView, filterView, recipeDetailsView]);
   removeHidden([recipeDisplayView]);
@@ -337,7 +328,7 @@ filterViewButton.addEventListener('click', event => {
 
 searchButton.addEventListener('click', displayRecipeBySearchCriteria);
 
-navFavoritesButton.addEventListener('click', displayFavoriteRecipes)
+navFavoritesButton.addEventListener('click', displayFavoriteRecipes);
 
 navFilterFavoritesButton.addEventListener('click', displayFavoritesFilterView);
 
