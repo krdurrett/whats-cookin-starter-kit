@@ -2,8 +2,6 @@
 <html>
   <head>
     <link rel="stylesheet" href="./styles.css">
-    <link rel="stylesheet" href="node_modules/@glidejs/glide/dist/css/glide.core.min.css">
-    <link rel="stylesheet" href="node_modules/@glidejs/glide/dist/css/glide.theme.min.css">
     <meta charset="UTF-8">
     <title>What's Cookin</title>
   </head>
@@ -40,19 +38,6 @@
         </section>
       </nav>
       <section class="landing-page-view" id="landingPageView">
-        <div class="glide">
-          <div data-glide-el="track" class="glide__track">
-            <ul class="glide__slides">
-              <li class="glide__slide"><img src="./images/broccoli.jpg"></li>
-              <li class="glide__slide"><img src="./images/herbs.jpg"></li>
-              <li class="glide__slide"><img src="./images/personcooking.webp"></li>
-            </ul>
-          </div>
-          <div class="glide__arrows" data-glide-el="controls">
-            <button class="glide__arrow glide__arrow--left" data-glide-dir="<">prev</button>
-            <button class="glide__arrow glide__arrow--right" data-glide-dir=">">next</button>
-          </div>
-        </div>
         <button class="all-recipes-button" id="allRecipesButton">View All Recipes!</button>
       </section>
       <section class="recipe-display-view hidden" id="recipeDisplayView">
@@ -69,28 +54,7 @@
         </section>
       </section>
       <section class="recipe-details-view hidden" id="recipeDetailsView">
-        <section class="recipe-header" id="recipeHeader">
-          <span>Recipe Name</span>
-          <span>Recipe Cost</span>
-          <div class="recipe-detail-buttons">
-            <button>🥘</button>
-            <button>❤️</button>
-          </div>
-        </section>
-        <div class= "recipe-details">
-          <section class="ingredients">
-            <h2>Ingredients</h2>
-            <ul>
-              <li>beans</li>
-            </ul>
-          </section>
-          <section class="instructions">
-            <h2>Instructions</h2>
-            <ol>
-              <li>mix beans</li>
-            </ol>
-          </section>
-        </div>
+        <!-- recipe details go here! -->
       </section>
       <section class="filter-view hidden" id="filterView">
         <form class="filter-form">

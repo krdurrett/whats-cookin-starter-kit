@@ -17,6 +17,11 @@ body {
   width: 10%;
 }
 
+.glide__slide {
+  width: 10px;
+  height: 10px;
+}
+
 main {
   display: flex;
   flex-direction: column;

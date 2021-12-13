@@ -3,9 +3,6 @@ import RecipeRepository from './classes/RecipeRepository';
 import Recipe from './classes/Recipe';
 import User from './classes/User';
 import { fetchAllUsers, fetchAllRecipes, fetchAllIngredients } from './apiCalls';
-import Glide from '@glidejs/glide';
-import './images/broccoli.jpg';
-
 
 
 //Query Selectors
@@ -43,7 +40,7 @@ let user;
 let ingredientsData;
 
 //Funtions
-new Glide('.glide').mount()
+
 
 const fetchAll = () => {
   Promise.all([fetchAllUsers(), fetchAllRecipes(), fetchAllIngredients()])
@@ -106,11 +103,7 @@ const showRecipeDetails = (event) => {
       recipeDetailsView.innerHTML = `
       <section class="recipe-header" id="recipeHeader">
         <span>${recipe.name}</span>
-        <span>${selectedRecipe.getRecipeCost()}</span>
-        <div class="recipe-detail-buttons">
-          <button class="to-cook-button" id="${recipe.id}">🥘</button>
-          <button class="add-favorite-button" id="${recipe.id}">❤️</button>
-        </div>
+        <span>$${selectedRecipe.getRecipeCost()}</span>
       </section>
       <div class= "recipe-details">
         <section class="ingredients">
@@ -338,7 +331,7 @@ filterViewButton.addEventListener('click', event => {
 
 searchButton.addEventListener('click', displayRecipeBySearchCriteria);
 
-navFavoritesButton.addEventListener('click', displayFavoriteRecipes)
+navFavoritesButton.addEventListener('click', displayFavoriteRecipes);
 
 navFilterFavoritesButton.addEventListener('click', displayFavoritesFilterView);
 
