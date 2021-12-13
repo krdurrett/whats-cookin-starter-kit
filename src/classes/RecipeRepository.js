@@ -13,14 +13,19 @@ class RecipeRepository {
   }
   getRecipeByName(searchPhrase) {
     this.recipes.filter(recipe => {
-      if(recipe.name.includes(searchPhrase)) {
+      if(recipe.name.toLowerCase().includes(searchPhrase)) {
         this.filteredRecipes.push(recipe);
       }
     })
   }
   getRecipeByIngredients(searchPhrase) {
+    console.log('inside get recipe by ingredients', this);
     const filteredIngredients = this.ingredients.filter(ingredient => {
-      return ingredient.name.includes(searchPhrase)
+      if(ingredient.name === undefined) {
+        return
+      } else {
+        return ingredient.name.includes(searchPhrase)
+      }
     });
     filteredIngredients.forEach(ingredient => {
       const recipesToPush = this.recipes.filter(recipe => {

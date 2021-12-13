@@ -7,14 +7,11 @@ import { recipeData, ingredientsData, usersData } from '../src/data/recipes-test
 describe('User', () => {
   let recipe;
   let user;
-
+  let user1;
   beforeEach(() => {
-    recipeData.forEach(recipes => {
-      recipe = new Recipe(recipes, ingredientsData);
-    })
-    usersData.forEach(person => {
-      user = new User(person, ingredientsData);
-    });
+    recipe = new Recipe(recipeData[1], ingredientsData);
+    user = new User(usersData[1], ingredientsData);
+    user1 = new User({}, []);
   });
   it('Should be a function', () => {
     expect(User).to.be.a('function');
@@ -24,12 +21,15 @@ describe('User', () => {
   });
   it('Should store a name', () => {
     expect(user.name).to.equal('Ephraim Goyette');
+    expect(user1.name).to.equal(undefined);
   });
   it('Should have an id', () => {
     expect(user.id).to.equal(2);
+    expect(user1.id).to.equal(undefined);
   });
   it('Should have a pantry', () => {
     expect(user.pantry).to.be.an('array');
+    expect(user1.pantry).to.equal(undefined);
   });
   it('Should have favorite recipes', () => {
     user.addToFavorites(recipe);
@@ -58,7 +58,7 @@ describe('User', () => {
   });
   it('Should be able to filter favorite recipes by ingredient', () => {
     user.addToFavorites(recipe);
-    user.getRecipeByIngedients('pork chop');
+    user.getRecipeByIngredients('pork chop');
     expect(user.filteredFavoriteRecipes[0]).to.be.a('object');
   });
 })
