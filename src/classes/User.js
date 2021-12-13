@@ -31,7 +31,7 @@ class User {
   }
   getRecipeByName(searchPhrase) {
     this.favoriteRecipes.filter(recipe => {
-      if(recipe.name.includes(searchPhrase)) {
+      if(recipe.name.toLowerCase().includes(searchPhrase)) {
         this.filteredFavoriteRecipes.push(recipe);
       }
     })
