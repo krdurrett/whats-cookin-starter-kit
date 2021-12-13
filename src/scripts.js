@@ -40,17 +40,12 @@ let user;
 let ingredientsData;
 
 //Funtions
-
-
 const fetchAll = () => {
   Promise.all([fetchAllUsers(), fetchAllRecipes(), fetchAllIngredients()])
   .then(data => {
     user = new User(getRandomElement(data[0]), data[2])
-    console.log('>>>>>>>>', data)
     recipeRepository = new RecipeRepository(data[1], data[2])
     ingredientsData = data[2];
-    console.log(data[2]);
-    console.log(recipeRepository);
   })
 }
 
@@ -180,7 +175,6 @@ const displayRecipeBySearchCriteria = () => {
   heading.innerText = `Recipes searched by ${searchInputValue}`;
   addHidden([landingPageView, filterView, recipeDetailsView]);
   removeHidden([recipeDisplayView]);
-  console.log('recRepo inside display recipe by search cirteria', recipeRepository);
   recipeRepository.getRecipeByName(searchInputValue);
   recipeRepository.getRecipeByIngredients(searchInputValue);
   displayFilteredRecipes();
@@ -278,7 +272,6 @@ const displayFavoriteFilteredRecipes = () => {
 const displayFavoriteRecipesBySearchCriteria = () => {
   user.filteredFavoriteRecipes = [];
   const favoriteSearchInputValue = favoriteSearchInput.value.toLowerCase();
-  console.log('search input', favoriteSearchInput.value);
   heading.innerText = `Favorite recipes searched by ${favoriteSearchInputValue}`;
   addHidden([landingPageView, filterView, recipeDetailsView]);
   removeHidden([recipeDisplayView]);
