@@ -30,8 +30,6 @@ In this project, you will create a recipe tracking / meal planning application t
  - Each recipe card has a heart and cookpot icon.
  - When the heart is clicked, the recipe is added to the "Favorites" section and can be viewed by clicking, view favorites
  - To return to the home page, user can click the "home" button in the upper left hand corner
-
- ![Screen_Recording_2021-12-13_at_5_40_55_PM_AdobeCreativeCloudExpress](https://user-images.githubusercontent.com/78129211/145912073-a2f7453c-6c4b-4c17-a42a-0b7a40691571.gif)
  
  ![](https://media3.giphy.com/media/9GEVS758efNEOdrbmA/giphy.gif)
 
