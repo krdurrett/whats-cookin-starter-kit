@@ -43,9 +43,9 @@ let ingredientsData;
 const fetchAll = () => {
   Promise.all([fetchAllUsers(), fetchAllRecipes(), fetchAllIngredients()])
   .then(data => {
-    user = new User(getRandomElement(data[0]), data[2])
-    recipeRepository = new RecipeRepository(data[1], data[2])
-    ingredientsData = data[2];
+    user = new User(getRandomElement(data[0].usersData), data[2].ingredientsData)
+    recipeRepository = new RecipeRepository(data[1].recipeData, data[2].ingredientsData)
+    ingredientsData = data[2].ingredientsData;
   })
 }
 

@@ -53,7 +53,7 @@ describe('User', () => {
   });
   it('Should be able to filter favorite recipes by name', () => {
     user.addToFavorites(recipe);
-    user.getRecipeByName('Maple');
+    user.getRecipeByName('maple');
     expect(user.filteredFavoriteRecipes[0]).to.be.a('object');
   });
   it('Should be able to filter favorite recipes by ingredient', () => {
