@@ -39,7 +39,7 @@ describe('RecipeRepository', () => {
   });
 
   it('Should be able to filter recipes by name', () => {
-    recipeRepository.getRecipeByName('Cookie');
+    recipeRepository.getRecipeByName('cookie');
     expect(recipeRepository.filteredRecipes).to.be.an('array');
     expect(recipeRepository.filteredRecipes[0]).to.be.an('object');
   });
