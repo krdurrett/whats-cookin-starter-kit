@@ -43,7 +43,7 @@ class Pantry extends User {
       const ingredientName = this.ingredients.find(ingredient => {
         return ingredient.id === missingIngredient.id
       }).name
-      return {id: missingIngredient.id, amountNeeded: missingIngredient.amountNeeded, unit: missingIngredient.unit, name: ingredientName};
+      return {...missingIngredient, name: ingredientName}
     });
   }
 }
