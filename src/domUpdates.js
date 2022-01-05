@@ -55,6 +55,20 @@ let domUpdates = {
       </section>
     </div>`
     document.getElementById('recipeHeader').style.backgroundImage = `url(${selectedRecipe.image})`
+  },
+  showFilterForm(uniqueTags) {
+    filterViewTags.innerHTML = '';
+    uniqueTags.forEach(tag => {
+      filterViewTags.innerHTML += `
+      <div class="tag-style-div">
+      <input type="radio" id="${tag}" name="tag" value="${tag}">
+      <label for="${tag}">${tag}</label>
+      </div>
+      `
+    });
+  },
+  showHeading(headingText) {
+    heading.innerText = `Recipes Filtered by ${headingText}`
   }
 };
 

@@ -75,15 +75,7 @@ const showRecipeDetails = (event) => {
 const displayFilterForm = () => {
   domUpdates.addHidden([landingPageView, recipeDisplayView, recipeDetailsView]);
   domUpdates.removeHidden([filterView]);
-  filterViewTags.innerHTML = '';
-  returnUniqueTags().forEach(tag => {
-    filterViewTags.innerHTML += `
-    <div class="tag-style-div">
-    <input type="radio" id="${tag}" name="tag" value="${tag}">
-    <label for="${tag}">${tag}</label>
-    </div>
-    `
-  });
+  domUpdates.showFilterForm(returnUniqueTags());
 }
 
 const returnUniqueTags = () => {
@@ -103,7 +95,8 @@ const displayRecipeByTag = (event) => {
   const selectedTag = document.querySelector('input[name="tag"]:checked').value;
   domUpdates.addHidden([filterView, landingPageView, recipeDetailsView]);
   domUpdates.removeHidden([recipeDisplayView]);
-  heading.innerText = `Recipes Filtered by ${selectedTag}`
+  domUpdates.showHeading(selectedTag);
+  // heading.innerText = `Recipes Filtered by ${selectedTag}`
   recipeRepository.getRecipeByTag(selectedTag);
   displayFilteredRecipes();
 }
