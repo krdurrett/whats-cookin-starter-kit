@@ -32,14 +32,19 @@ class Pantry extends User {
         return ingredient.ingredient === recipeIngredient.id
       })
       if (foundPantryIngredient === undefined) {
-        this.missingIngredients.push({id: recipeIngredient.id, amountNeeded: recipeIngredient.quantity.amount})
+        this.missingIngredients.push({id: recipeIngredient.id, amountNeeded: recipeIngredient.quantity.amount, unit: recipeIngredient.quantity.unit})
       } else if (foundPantryIngredient.ingredient === recipeIngredient.id && foundPantryIngredient.amount < recipeIngredient.quantity.amount) {
-        this.missingIngredients.push({id: recipeIngredient.id, amountNeeded: recipeIngredient.quantity.amount - foundPantryIngredient.amount})
+        this.missingIngredients.push({id: recipeIngredient.id, amountNeeded: recipeIngredient.quantity.amount - foundPantryIngredient.amount, unit: recipeIngredient.quantity.unit})
       }
-    })
+    });
   }
   listMissingIngredientsByName() {
-
+    return this.missingIngredients.map(missingIngredient => {
+      const ingredientName = this.ingredients.find(ingredient => {
+        return ingredient.id === missingIngredient.id
+      }).name
+      return {id: missingIngredient.id, amountNeeded: missingIngredient.amountNeeded, unit: missingIngredient.unit, name: ingredientName};
+    });
   }
 }
 
