@@ -28,11 +28,12 @@ describe('Pantry', () => {
   it('should be able to determine missing ingredients', () => {
     pantry.determineMissingIngredients(recipe);
     expect(pantry.missingIngredients).to.be.an('array');
-    expect(pantry.missingIngredients[0]).to.deep.equal({ id: 1009016, amountNeeded: 1.5, unit: "cups"});
+    expect(pantry.missingIngredients[0]).to.deep.equal({ id: 1009016, amountNeeded: 1.5, unit: 'cups'});
   });
   it('Should be able to list names of missing ingredients', () => {
     pantry.determineMissingIngredients(recipe);
     pantry.listMissingIngredientsByName();
-    console.log(pantry.listMissingIngredientsByName())
+    expect(pantry.listMissingIngredientsByName()).to.be.an('array');
+    expect(pantry.listMissingIngredientsByName()[0]).to.deep.equal({ id: 1009016, amountNeeded: 1.5, unit: 'cups', name:'apple cider'})
   })
 })
