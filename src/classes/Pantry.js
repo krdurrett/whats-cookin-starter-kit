@@ -4,6 +4,7 @@ class Pantry extends User {
   constructor(usersData, ingredientsData) {
     super(usersData, ingredientsData);
     this.hasAllIngredients = false;
+    this.missingIngredients = [];
   }
   determineIfPantryHasIngredients(recipe) {
     const ingredientIds = recipe.ingredients.map(ingredient => {
@@ -24,6 +25,21 @@ class Pantry extends User {
         this.hasAllIngredients = true
       }
     })
+  }
+  determineMissingIngredients(recipe) {
+    recipe.ingredients.forEach((recipeIngredient) => {
+      const foundPantryIngredient = this.pantry.find(ingredient => {
+        return ingredient.ingredient === recipeIngredient.id
+      })
+      if (foundPantryIngredient === undefined) {
+        this.missingIngredients.push({id: recipeIngredient.id, amountNeeded: recipeIngredient.quantity.amount})
+      } else if (foundPantryIngredient.ingredient === recipeIngredient.id && foundPantryIngredient.amount < recipeIngredient.quantity.amount) {
+        this.missingIngredients.push({id: recipeIngredient.id, amountNeeded: recipeIngredient.quantity.amount - foundPantryIngredient.amount})
+      }
+    })
+  }
+  listMissingIngredientsByName() {
+
   }
 }
 

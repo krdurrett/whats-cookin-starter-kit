@@ -25,4 +25,10 @@ describe('Pantry', () => {
     pantry.determineIfPantryHasIngredients(recipe);
     expect(pantry.hasAllIngredients).to.equal(false);
   });
+  it('should be able to determine missing ingredients', () => {
+    pantry.determineMissingIngredients(recipe);
+    expect(pantry.missingIngredients).to.be.an('array');
+    expect(pantry.missingIngredients[0]).to.deep.equal({ id: 1009016, amountNeeded: 1.5 });
+  });
+
 })
