@@ -38,7 +38,11 @@ class User {
   }
   getRecipeByIngredients(searchPhrase) {
     const filteredIngredients = this.ingredients.filter(ingredient => {
-      return ingredient.name.includes(searchPhrase)
+      if (ingredient.name === undefined) {
+        return
+      } else {
+        return ingredient.name.toLowerCase().includes(searchPhrase)
+      }
     });
     filteredIngredients.forEach(ingredient => {
       const recipesToPush = this.favoriteRecipes.filter(recipe => {

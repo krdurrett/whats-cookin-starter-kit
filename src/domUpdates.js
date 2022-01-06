@@ -97,6 +97,40 @@ let domUpdates = {
         </div>
       </section>`;
     })
+  },
+  showFilterViewTitle() {
+    filterViewTitle.innerText = 'Choose options to filter your favorite recipes below';
+  },
+  showFavoriteFilteredRecipes(favoriteFilteredRecipes) {
+    recipeCardSection.innerHTML = ``;
+    favoriteFilteredRecipes.forEach(recipe => {
+      recipeCardSection.innerHTML += `
+      <section class="recipe-card">
+        <img class="recipe-card-img" src="${recipe.image}">
+        <button class="recipe-name-button" id="${recipe.id}" >${recipe.name}</button>
+        <div class="recipe-card-buttons">
+          <button class="to-cook-button" id="${recipe.id}">🥘</button>
+          <button class="remove-favorite-button" id="${recipe.id}">❌</button>
+        </div>
+      </section>`;
+    })
+  },
+  showHomeButtonText(text) {
+    homeButton.innerText = text;
+  },
+  showRecipesToCook(recipesToCook) {
+    recipeCardSection.innerHTML = ``;
+    recipesToCook.forEach(recipe => {
+      recipeCardSection.innerHTML += `
+      <section class="recipe-card">
+        <img class="recipe-card-img" src="${recipe.image}">
+        <button class="recipe-name-button" id="${recipe.id}" >${recipe.name}</button>
+        <div class="recipe-card-buttons">
+          <button class="to-cook-button" id="${recipe.id}">🥘</button>
+          <button class="add-favorite-button" id="${recipe.id}">❤️</button>
+        </div>
+      </section>`;
+    })
   }
 };
 
