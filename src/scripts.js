@@ -3,6 +3,7 @@ import RecipeRepository from './classes/RecipeRepository';
 import Recipe from './classes/Recipe';
 import User from './classes/User';
 import { fetchAllUsers, fetchAllRecipes, fetchAllIngredients } from './apiCalls';
+import domUpdates from './domUpdates';
 
 
 //Query Selectors
@@ -49,87 +50,32 @@ const fetchAll = () => {
   })
 }
 
-const addHidden = elements => {
-  elements.forEach(item => {
-    item.classList.add("hidden");
-  })
-}
-
-const removeHidden = elements => {
-  elements.forEach(item => {
-    item.classList.remove("hidden");
-  })
-}
-
 const getRandomElement = array => {
   var randomIndex = Math.floor(Math.random() * array.length);
   return array[randomIndex];
 }
 
 const displayAllRecipes = () => {
-  addHidden([landingPageView]);
-  removeHidden([recipeDisplayView]);
-  heading.innerText = 'All Recipes'
-  recipeCardSection.innerHTML = ``;
-  recipeRepository.recipes.forEach(recipe => {
-    recipeCardSection.innerHTML += `
-    <section class="recipe-card">
-      <img class="recipe-card-img" src="${recipe.image}">
-      <button class="recipe-name-button" id="${recipe.id}" >${recipe.name}</button>
-      <div class="recipe-card-buttons">
-        <button class="to-cook-button" id="${recipe.id}">🥘</button>
-        <button class="add-favorite-button" id="${recipe.id}">❤️</button>
-      </div>
-    </section>`;
-  })
+  domUpdates.addHidden([landingPageView]);
+  domUpdates.removeHidden([recipeDisplayView]);
+  domUpdates.getAllRecipes(recipeRepository.recipes);
 }
 
 const showRecipeDetails = (event) => {
-  addHidden([recipeDisplayView]);
-  removeHidden([recipeDetailsView]);
+  domUpdates.addHidden([recipeDisplayView]);
+  domUpdates.removeHidden([recipeDetailsView]);
   recipeRepository.recipes.forEach(recipe => {
     if(event.target.id === recipe.id.toString()) {
       const selectedRecipe = new Recipe(recipe, ingredientsData);
-      let ingredientNames = selectedRecipe.getIngredientNames().reduce((acc, ingredient) => {
-        acc += `<li>${ingredient}</li>`
-        return acc;
-      }, ``);
-      let ingredientInstructions = selectedRecipe.getRecipeInstructions().reduce((acc, instruction) => {
-        acc += `<li>${instruction}</li>`
-        return acc;
-      }, ``);
-      recipeDetailsView.innerHTML = `
-      <section class="recipe-header" id="recipeHeader">
-        <span>${recipe.name}</span>
-        <span>$${selectedRecipe.getRecipeCost()}</span>
-      </section>
-      <div class= "recipe-details">
-        <section class="ingredients">
-          <h2>Ingredients</h2>
-          <ul>${ingredientNames}</ul>
-        </section>
-        <section class="instructions">
-          <h2>Instructions</h2>
-          <ol>${ingredientInstructions}</ol>
-        </section>
-      </div>`
-      document.getElementById('recipeHeader').style.backgroundImage = `url(${recipe.image})`
+      domUpdates.getRecipeDetails(selectedRecipe);
     }
   });
 }
 
 const displayFilterForm = () => {
-  addHidden([landingPageView, recipeDisplayView, recipeDetailsView]);
-  removeHidden([filterView]);
-  filterViewTags.innerHTML = '';
-  returnUniqueTags().forEach(tag => {
-    filterViewTags.innerHTML += `
-    <div class="tag-style-div">
-    <input type="radio" id="${tag}" name="tag" value="${tag}">
-    <label for="${tag}">${tag}</label>
-    </div>
-    `
-  });
+  domUpdates.addHidden([landingPageView, recipeDisplayView, recipeDetailsView]);
+  domUpdates.removeHidden([filterView]);
+  domUpdates.showFilterForm(returnUniqueTags());
 }
 
 const returnUniqueTags = () => {
@@ -147,34 +93,23 @@ const returnUniqueTags = () => {
 const displayRecipeByTag = (event) => {
   event.preventDefault();
   const selectedTag = document.querySelector('input[name="tag"]:checked').value;
-  addHidden([filterView, landingPageView, recipeDetailsView]);
-  removeHidden([recipeDisplayView]);
-  heading.innerText = `Recipes Filtered by ${selectedTag}`
+  domUpdates.addHidden([filterView, landingPageView, recipeDetailsView]);
+  domUpdates.removeHidden([recipeDisplayView]);
+  domUpdates.showHeading(`Recipes Filtered by ${selectedTag}`);
   recipeRepository.getRecipeByTag(selectedTag);
   displayFilteredRecipes();
 }
 
 const displayFilteredRecipes = () => {
-  recipeCardSection.innerHTML = ``;
-  recipeRepository.filteredRecipes.forEach(recipe => {
-    recipeCardSection.innerHTML += `
-    <section class="recipe-card">
-      <img class="recipe-card-img" src="${recipe.image}">
-      <button class="recipe-name-button" id="${recipe.id}" >${recipe.name}</button>
-      <div class="recipe-card-buttons">
-        <button class="to-cook-button" id="${recipe.id}">🥘</button>
-        <button class="add-favorite-button" id="${recipe.id}">❤️</button>
-      </div>
-    </section>`;
-  });
+  domUpdates.showFilteredRecipes(recipeRepository.filteredRecipes);
 }
 
 const displayRecipeBySearchCriteria = () => {
   recipeRepository.filteredRecipes = [];
   const searchInputValue = searchInput.value.toLowerCase();
-  heading.innerText = `Recipes searched by ${searchInputValue}`;
-  addHidden([landingPageView, filterView, recipeDetailsView]);
-  removeHidden([recipeDisplayView]);
+  domUpdates.showHeading(`Recipes Filtered by ${searchInputValue}`);
+  domUpdates.addHidden([landingPageView, filterView, recipeDetailsView]);
+  domUpdates.removeHidden([recipeDisplayView]);
   recipeRepository.getRecipeByName(searchInputValue);
   recipeRepository.getRecipeByIngredients(searchInputValue);
   displayFilteredRecipes();
@@ -205,28 +140,16 @@ const addRecipeToFavorites = (event) => {
 }
 
 const displayFavoriteRecipes = () => {
-  addHidden([landingPageView, filterView, recipeDetailsView]);
-  removeHidden([recipeDisplayView]);
+  domUpdates.addHidden([landingPageView, filterView, recipeDetailsView]);
+  domUpdates.removeHidden([recipeDisplayView]);
+  domUpdates.showFavoriteRecipes(user.favoriteRecipes);
+  domUpdates.showHeading('Favorite Recipes')
   updateFavoritesNavBar();
-  heading.innerText = 'Favorite Recipes';
-  recipeCardSection.innerHTML = ``;
-  user.favoriteRecipes.forEach(recipe => {
-    recipeCardSection.innerHTML += `
-    <section class="recipe-card">
-      <img class="recipe-card-img" src="${recipe.image}">
-      <button class="recipe-name-button" id="${recipe.id}" >${recipe.name}</button>
-      <div class="recipe-card-buttons">
-        <button class="to-cook-button" id="${recipe.id}">🥘</button>
-        <button class="remove-favorite-button" id="${recipe.id}">❌</button>
-      </div>
-    </section>`;
-  })
 }
 
 const updateFavoritesNavBar = () => {
-  addHidden([homeNavBar]);
-  removeHidden([favoritesNavBar]);
-
+  domUpdates.addHidden([homeNavBar]);
+  domUpdates.removeHidden([favoritesNavBar]);
 }
 
 const removeRecipeFromFavorites = (event) => {
@@ -238,43 +161,32 @@ const removeRecipeFromFavorites = (event) => {
 }
 
 const displayFavoritesFilterView = () => {
-  addHidden([filterViewButton]);
-  removeHidden([favoritesFilterViewButton]);
+  domUpdates.addHidden([filterViewButton]);
+  domUpdates.removeHidden([favoritesFilterViewButton]);
+  domUpdates.showFilterViewTitle();
   displayFilterForm();
-  filterViewTitle.innerText = 'Choose options to filter your favorite recipes below';
 }
 
 const displayFavoriteRecipesByTag = (event) => {
   event.preventDefault();
-  addHidden([filterView, landingPageView, recipeDetailsView]);
-  removeHidden([recipeDisplayView]);
+  domUpdates.addHidden([filterView, landingPageView, recipeDetailsView]);
+  domUpdates.removeHidden([recipeDisplayView]);
   const selectedTag = document.querySelector('input[name="tag"]:checked').value;
-  heading.innerText = `Favorite Recipes Filtered by ${selectedTag}`
+  domUpdates.showHeading(`Favorite Recipes Filtered by ${selectedTag}`);
   user.getFavoriteRecipeByTag(selectedTag);
   displayFavoriteFilteredRecipes();
 }
 
 const displayFavoriteFilteredRecipes = () => {
-  recipeCardSection.innerHTML = ``;
-  user.filteredFavoriteRecipes.forEach(recipe => {
-    recipeCardSection.innerHTML += `
-    <section class="recipe-card">
-      <img class="recipe-card-img" src="${recipe.image}">
-      <button class="recipe-name-button" id="${recipe.id}" >${recipe.name}</button>
-      <div class="recipe-card-buttons">
-        <button class="to-cook-button" id="${recipe.id}">🥘</button>
-        <button class="remove-favorite-button" id="${recipe.id}">❌</button>
-      </div>
-    </section>`;
-  })
+  domUpdates.showFavoriteFilteredRecipes(user.filteredFavoriteRecipes);
 }
 
 const displayFavoriteRecipesBySearchCriteria = () => {
   user.filteredFavoriteRecipes = [];
   const favoriteSearchInputValue = favoriteSearchInput.value.toLowerCase();
-  heading.innerText = `Favorite recipes searched by ${favoriteSearchInputValue}`;
-  addHidden([landingPageView, filterView, recipeDetailsView]);
-  removeHidden([recipeDisplayView]);
+  domUpdates.showHeading(`Favorite recipes searched by ${favoriteSearchInputValue}`);
+  domUpdates.addHidden([landingPageView, filterView, recipeDetailsView]);
+  domUpdates.removeHidden([recipeDisplayView]);
   user.getRecipeByName(favoriteSearchInputValue);
   user.getRecipeByIngredients(favoriteSearchInputValue);
   displayFavoriteFilteredRecipes();
@@ -289,28 +201,17 @@ const addToToCook = (event) => {
 }
 
 const displayRecipesToCook = () => {
-  addHidden([landingPageView, filterView, recipeDetailsView]);
-  removeHidden([recipeDisplayView]);
-  heading.innerText = 'Recipes To Cook';
-  homeButton.innerText = 'Home';
-  recipeCardSection.innerHTML = ``;
-  user.recipesToCook.forEach(recipe => {
-    recipeCardSection.innerHTML += `
-    <section class="recipe-card">
-      <img class="recipe-card-img" src="${recipe.image}">
-      <button class="recipe-name-button" id="${recipe.id}" >${recipe.name}</button>
-      <div class="recipe-card-buttons">
-        <button class="to-cook-button" id="${recipe.id}">🥘</button>
-        <button class="add-favorite-button" id="${recipe.id}">❤️</button>
-      </div>
-    </section>`;
-  })
+  domUpdates.addHidden([landingPageView, filterView, recipeDetailsView]);
+  domUpdates.removeHidden([recipeDisplayView]);
+  domUpdates.showHeading('Recipes To Cook');
+  domUpdates.showHomeButtonText('Home');
+  domUpdates.showRecipesToCook(user.recipesToCook);
 }
 
 const returnToHomePage = () => {
-  addHidden([filterView, recipeDetailsView, recipeDisplayView, favoritesNavBar]);
-  removeHidden([landingPageView, homeNavBar]);
-  homeButton.innerText = 'What\'s Cookin'
+  domUpdates.addHidden([filterView, recipeDetailsView, recipeDisplayView, favoritesNavBar]);
+  domUpdates.removeHidden([landingPageView, homeNavBar]);
+  domUpdates.showHomeButtonText('What\'s Cookin');
 }
 
 //Event Listeners
