@@ -242,6 +242,32 @@ button {
   border: 2px solid purple;
 }
 
+.pantry-heading {
+  display: flex;
+  align-self: flex-start;
+  margin: 0;
+}
+
+.pantry-view {
+  height: 100%;
+}
+
+.pantry-item-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.pantry-item-list {
+  display: flex;
+  justify-content: center;
+  background-color: rgba(225, 225, 225, .6);
+  height: 80%;
+  width: 60%;
+  overflow-y: auto;
+}
+
 .hidden {
   display: none;
 }

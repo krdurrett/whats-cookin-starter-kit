@@ -34,6 +34,8 @@ const homeButton = document.querySelector('#homeButton');
 const favoritesHomeButton = document.querySelector('#favoritesHomeButton');
 const homeNavBar = document.querySelector('#homeNavBar');
 const favoriteNavToCookButton = document.querySelector('#favoriteNavToCookButton');
+const navPantryButton = document.querySelector('#navPantryButton');
+const favoriteNavPantryButton = document.querySelector('#favoriteNavPantryButton');
 
 //Global variables
 let recipeRepository;
@@ -250,3 +252,7 @@ favoritesHomeButton.addEventListener('click', returnToHomePage);
 favoritesNavFavoritesButton.addEventListener('click', displayFavoriteRecipes);
 
 favoriteNavToCookButton.addEventListener('click', displayRecipesToCook);
+
+navPantryButton.addEventListener('click', displayPantry);
+
+favoriteNavPantryButton.addEventListener('click', displayPantry);
