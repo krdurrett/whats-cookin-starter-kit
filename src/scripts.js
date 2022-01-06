@@ -91,6 +91,7 @@ const returnUniqueTags = () => {
 }
 
 const displayRecipeByTag = (event) => {
+  recipeRepository.filteredRecipes = [];
   event.preventDefault();
   const selectedTag = document.querySelector('input[name="tag"]:checked').value;
   domUpdates.addHidden([filterView, landingPageView, recipeDetailsView]);
@@ -163,11 +164,12 @@ const removeRecipeFromFavorites = (event) => {
 const displayFavoritesFilterView = () => {
   domUpdates.addHidden([filterViewButton]);
   domUpdates.removeHidden([favoritesFilterViewButton]);
-  domUpdates.showFilterViewTitle();
+  domUpdates.showFilterViewTitle('Choose options to filter your favorite recipes below');
   displayFilterForm();
 }
 
 const displayFavoriteRecipesByTag = (event) => {
+  user.filteredFavoriteRecipes = [];
   event.preventDefault();
   domUpdates.addHidden([filterView, landingPageView, recipeDetailsView]);
   domUpdates.removeHidden([recipeDisplayView]);
@@ -209,9 +211,10 @@ const displayRecipesToCook = () => {
 }
 
 const returnToHomePage = () => {
-  domUpdates.addHidden([filterView, recipeDetailsView, recipeDisplayView, favoritesNavBar]);
-  domUpdates.removeHidden([landingPageView, homeNavBar]);
+  domUpdates.addHidden([filterView, recipeDetailsView, recipeDisplayView, favoritesNavBar, favoritesFilterViewButton]);
+  domUpdates.removeHidden([landingPageView, homeNavBar, filterViewButton]);
   domUpdates.showHomeButtonText('What\'s Cookin');
+  domUpdates.showFilterViewTitle('Choose options to filter recipes below')
 }
 
 //Event Listeners
