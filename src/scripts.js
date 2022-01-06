@@ -95,31 +95,19 @@ const displayRecipeByTag = (event) => {
   const selectedTag = document.querySelector('input[name="tag"]:checked').value;
   domUpdates.addHidden([filterView, landingPageView, recipeDetailsView]);
   domUpdates.removeHidden([recipeDisplayView]);
-  domUpdates.showHeading(selectedTag);
-  // heading.innerText = `Recipes Filtered by ${selectedTag}`
+  domUpdates.showHeading(`Recipes Filtered by ${selectedTag}`);
   recipeRepository.getRecipeByTag(selectedTag);
   displayFilteredRecipes();
 }
 
 const displayFilteredRecipes = () => {
-  recipeCardSection.innerHTML = ``;
-  recipeRepository.filteredRecipes.forEach(recipe => {
-    recipeCardSection.innerHTML += `
-    <section class="recipe-card">
-      <img class="recipe-card-img" src="${recipe.image}">
-      <button class="recipe-name-button" id="${recipe.id}" >${recipe.name}</button>
-      <div class="recipe-card-buttons">
-        <button class="to-cook-button" id="${recipe.id}">🥘</button>
-        <button class="add-favorite-button" id="${recipe.id}">❤️</button>
-      </div>
-    </section>`;
-  });
+  domUpdates.showFilteredRecipes(recipeRepository.filteredRecipes);
 }
 
 const displayRecipeBySearchCriteria = () => {
   recipeRepository.filteredRecipes = [];
   const searchInputValue = searchInput.value.toLowerCase();
-  heading.innerText = `Recipes searched by ${searchInputValue}`;
+  domUpdates.showHeading(`Recipes Filtered by ${searchInputValue}`);
   domUpdates.addHidden([landingPageView, filterView, recipeDetailsView]);
   domUpdates.removeHidden([recipeDisplayView]);
   recipeRepository.getRecipeByName(searchInputValue);
@@ -154,20 +142,9 @@ const addRecipeToFavorites = (event) => {
 const displayFavoriteRecipes = () => {
   domUpdates.addHidden([landingPageView, filterView, recipeDetailsView]);
   domUpdates.removeHidden([recipeDisplayView]);
+  domUpdates.showFavoriteRecipes(user.favoriteRecipes);
+  domUpdates.showHeading('Favorite Recipes')
   updateFavoritesNavBar();
-  heading.innerText = 'Favorite Recipes';
-  recipeCardSection.innerHTML = ``;
-  user.favoriteRecipes.forEach(recipe => {
-    recipeCardSection.innerHTML += `
-    <section class="recipe-card">
-      <img class="recipe-card-img" src="${recipe.image}">
-      <button class="recipe-name-button" id="${recipe.id}" >${recipe.name}</button>
-      <div class="recipe-card-buttons">
-        <button class="to-cook-button" id="${recipe.id}">🥘</button>
-        <button class="remove-favorite-button" id="${recipe.id}">❌</button>
-      </div>
-    </section>`;
-  })
 }
 
 const updateFavoritesNavBar = () => {

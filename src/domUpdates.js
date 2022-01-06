@@ -68,7 +68,35 @@ let domUpdates = {
     });
   },
   showHeading(headingText) {
-    heading.innerText = `Recipes Filtered by ${headingText}`
+    heading.innerText = headingText;
+  },
+  showFilteredRecipes(filteredRecipes) {
+    recipeCardSection.innerHTML = ``;
+    filteredRecipes.forEach(recipe => {
+      recipeCardSection.innerHTML += `
+      <section class="recipe-card">
+        <img class="recipe-card-img" src="${recipe.image}">
+        <button class="recipe-name-button" id="${recipe.id}" >${recipe.name}</button>
+        <div class="recipe-card-buttons">
+          <button class="to-cook-button" id="${recipe.id}">🥘</button>
+          <button class="add-favorite-button" id="${recipe.id}">❤️</button>
+        </div>
+      </section>`;
+    });
+  },
+  showFavoriteRecipes(favoriteRecipes) {
+    recipeCardSection.innerHTML = ``;
+    favoriteRecipes.forEach(recipe => {
+      recipeCardSection.innerHTML += `
+      <section class="recipe-card">
+        <img class="recipe-card-img" src="${recipe.image}">
+        <button class="recipe-name-button" id="${recipe.id}" >${recipe.name}</button>
+        <div class="recipe-card-buttons">
+          <button class="to-cook-button" id="${recipe.id}">🥘</button>
+          <button class="remove-favorite-button" id="${recipe.id}">❌</button>
+        </div>
+      </section>`;
+    })
   }
 };
 
