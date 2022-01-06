@@ -98,8 +98,8 @@ let domUpdates = {
       </section>`;
     })
   },
-  showFilterViewTitle() {
-    filterViewTitle.innerText = 'Choose options to filter your favorite recipes below';
+  showFilterViewTitle(text) {
+    filterViewTitle.innerText = text;
   },
   showFavoriteFilteredRecipes(favoriteFilteredRecipes) {
     recipeCardSection.innerHTML = ``;
