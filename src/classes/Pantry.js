@@ -49,9 +49,13 @@ class Pantry extends User {
   }
   listPantryItems(recipeRepository) {
     this.pantryItems = this.pantry.map(pantryIngredient => {
-      const ingredientName = this.ingredients.find(ingredient => {
-        return ingredient.id === pantryIngredient.ingredient
-      }).name
+      const foundIngredient = this.ingredients.find(ingredient => {
+        if (ingredient.name === undefined) {
+          return
+        } else {
+          return ingredient.id === pantryIngredient.ingredient;
+        }
+      })
       let ingredientUnit;
       recipeRepository.recipes.forEach(recipe => {
         recipe.ingredients.forEach(ingredient => {
@@ -60,7 +64,11 @@ class Pantry extends User {
           }
         })
       })
-      return `${ingredientName} ${pantryIngredient.amount} ${ingredientUnit}`
+      if (foundIngredient === undefined) {
+        return
+      } else {
+        return `${foundIngredient.name} ${pantryIngredient.amount} ${ingredientUnit}`
+      }
     });
   }
 }
