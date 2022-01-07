@@ -37,6 +37,7 @@ const homeNavBar = document.querySelector('#homeNavBar');
 const favoriteNavToCookButton = document.querySelector('#favoriteNavToCookButton');
 const navPantryButton = document.querySelector('#navPantryButton');
 const favoriteNavPantryButton = document.querySelector('#favoriteNavPantryButton');
+const pantryItemList = document.querySelector('#pantryItemList');
 
 //Global variables
 let recipeRepository;
@@ -62,13 +63,13 @@ const getRandomElement = array => {
 }
 
 const displayAllRecipes = () => {
-  domUpdates.addHidden([landingPageView]);
+  domUpdates.addHidden([pantryView, landingPageView]);
   domUpdates.removeHidden([recipeDisplayView]);
   domUpdates.getAllRecipes(recipeRepository.recipes);
 }
 
 const showRecipeDetails = (event) => {
-  domUpdates.addHidden([recipeDisplayView]);
+  domUpdates.addHidden([pantryView, recipeDisplayView]);
   domUpdates.removeHidden([recipeDetailsView]);
   recipeRepository.recipes.forEach(recipe => {
     if(event.target.id === recipe.id.toString()) {
@@ -79,7 +80,7 @@ const showRecipeDetails = (event) => {
 }
 
 const displayFilterForm = () => {
-  domUpdates.addHidden([landingPageView, recipeDisplayView, recipeDetailsView]);
+  domUpdates.addHidden([pantryView, landingPageView, recipeDisplayView, recipeDetailsView]);
   domUpdates.removeHidden([filterView]);
   domUpdates.showFilterForm(returnUniqueTags());
 }
@@ -100,7 +101,7 @@ const displayRecipeByTag = (event) => {
   recipeRepository.filteredRecipes = [];
   event.preventDefault();
   const selectedTag = document.querySelector('input[name="tag"]:checked').value;
-  domUpdates.addHidden([filterView, landingPageView, recipeDetailsView]);
+  domUpdates.addHidden([pantryView, filterView, landingPageView, recipeDetailsView]);
   domUpdates.removeHidden([recipeDisplayView]);
   domUpdates.showHeading(`Recipes Filtered by ${selectedTag}`);
   recipeRepository.getRecipeByTag(selectedTag);
@@ -115,7 +116,7 @@ const displayRecipeBySearchCriteria = () => {
   recipeRepository.filteredRecipes = [];
   const searchInputValue = searchInput.value.toLowerCase();
   domUpdates.showHeading(`Recipes Filtered by ${searchInputValue}`);
-  domUpdates.addHidden([landingPageView, filterView, recipeDetailsView]);
+  domUpdates.addHidden([pantryView, landingPageView, filterView, recipeDetailsView]);
   domUpdates.removeHidden([recipeDisplayView]);
   recipeRepository.getRecipeByName(searchInputValue);
   recipeRepository.getRecipeByIngredients(searchInputValue);
@@ -147,7 +148,7 @@ const addRecipeToFavorites = (event) => {
 }
 
 const displayFavoriteRecipes = () => {
-  domUpdates.addHidden([landingPageView, filterView, recipeDetailsView]);
+  domUpdates.addHidden([pantryView, landingPageView, filterView, recipeDetailsView]);
   domUpdates.removeHidden([recipeDisplayView]);
   domUpdates.showFavoriteRecipes(user.favoriteRecipes);
   domUpdates.showHeading('Favorite Recipes')
@@ -168,7 +169,7 @@ const removeRecipeFromFavorites = (event) => {
 }
 
 const displayFavoritesFilterView = () => {
-  domUpdates.addHidden([filterViewButton]);
+  domUpdates.addHidden([filterViewButton, pantryView]);
   domUpdates.removeHidden([favoritesFilterViewButton]);
   domUpdates.showFilterViewTitle('Choose options to filter your favorite recipes below');
   displayFilterForm();
@@ -177,7 +178,7 @@ const displayFavoritesFilterView = () => {
 const displayFavoriteRecipesByTag = (event) => {
   user.filteredFavoriteRecipes = [];
   event.preventDefault();
-  domUpdates.addHidden([filterView, landingPageView, recipeDetailsView]);
+  domUpdates.addHidden([pantryView, filterView, landingPageView, recipeDetailsView]);
   domUpdates.removeHidden([recipeDisplayView]);
   const selectedTag = document.querySelector('input[name="tag"]:checked').value;
   domUpdates.showHeading(`Favorite Recipes Filtered by ${selectedTag}`);
@@ -193,7 +194,7 @@ const displayFavoriteRecipesBySearchCriteria = () => {
   user.filteredFavoriteRecipes = [];
   const favoriteSearchInputValue = favoriteSearchInput.value.toLowerCase();
   domUpdates.showHeading(`Favorite recipes searched by ${favoriteSearchInputValue}`);
-  domUpdates.addHidden([landingPageView, filterView, recipeDetailsView]);
+  domUpdates.addHidden([pantryView, landingPageView, filterView, recipeDetailsView]);
   domUpdates.removeHidden([recipeDisplayView]);
   user.getRecipeByName(favoriteSearchInputValue);
   user.getRecipeByIngredients(favoriteSearchInputValue);
@@ -209,15 +210,15 @@ const addToToCook = (event) => {
 }
 
 const displayRecipesToCook = () => {
-  domUpdates.addHidden([landingPageView, filterView, recipeDetailsView]);
+  domUpdates.addHidden([pantryView, landingPageView, filterView, recipeDetailsView]);
   domUpdates.removeHidden([recipeDisplayView]);
   domUpdates.showHeading('Recipes To Cook');
   domUpdates.showHomeButtonText('Home');
-  domUpdates.showRecipesToCook(user.recipesToCook);
+  domUpdates.showRecipesToCook(user.recipesToCook, pantry);
 }
 
 const returnToHomePage = () => {
-  domUpdates.addHidden([filterView, recipeDetailsView, recipeDisplayView, favoritesNavBar, favoritesFilterViewButton]);
+  domUpdates.addHidden([pantryView, filterView, recipeDetailsView, recipeDisplayView, favoritesNavBar, favoritesFilterViewButton]);
   domUpdates.removeHidden([landingPageView, homeNavBar, filterViewButton]);
   domUpdates.showHomeButtonText('What\'s Cookin');
   domUpdates.showFilterViewTitle('Choose options to filter recipes below')
@@ -225,10 +226,9 @@ const returnToHomePage = () => {
 
 const displayPantry = () => {
   domUpdates.addHidden([landingPageView, filterView, recipeDetailsView, recipeDisplayView, favoritesNavBar]);
-  domUpdates.removeHidden([pantryView, homeNavBar])
-  // domUpdates.showPantry()
+  domUpdates.removeHidden([pantryView, homeNavBar]);
   pantry.listPantryItems(recipeRepository);
-  console.log(pantry.pantryItems)
+  domUpdates.showPantry(pantry);
 }
 
 //Event Listeners

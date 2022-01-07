@@ -118,18 +118,40 @@ let domUpdates = {
   showHomeButtonText(text) {
     homeButton.innerText = text;
   },
-  showRecipesToCook(recipesToCook) {
+  showRecipesToCook(recipesToCook, pantry) {
     recipeCardSection.innerHTML = ``;
     recipesToCook.forEach(recipe => {
-      recipeCardSection.innerHTML += `
-      <section class="recipe-card">
-        <img class="recipe-card-img" src="${recipe.image}">
-        <button class="recipe-name-button" id="${recipe.id}" >${recipe.name}</button>
-        <div class="recipe-card-buttons">
-          <button class="to-cook-button" id="${recipe.id}">🥘</button>
-          <button class="add-favorite-button" id="${recipe.id}">❤️</button>
-        </div>
-      </section>`;
+      pantry.determineIfPantryHasIngredients(recipe);
+      if (pantry.hasAllIngredients) {
+        recipeCardSection.innerHTML += `
+        <section class="recipe-card">
+          <img class="recipe-card-img" src="${recipe.image}">
+          <button class="recipe-name-button" id="${recipe.id}" >${recipe.name}</button>
+          <div class="recipe-card-buttons">
+            <button class="determine-cookability">Cook now and remove ingredients from pantry</button>
+            <button class="add-favorite-button" id="${recipe.id}">❤️</button>
+          </div>
+        </section>`;
+      } else if (!pantry.hasAllIngredients) {
+        recipeCardSection.innerHTML += `
+        <section class="recipe-card">
+          <img class="recipe-card-img" src="${recipe.image}">
+          <button class="recipe-name-button" id="${recipe.id}" >${recipe.name}</button>
+          <div class="recipe-card-buttons">
+            <button class="determine-cookability">You are missing ingredients. Click to view them.</button>
+            <button class="add-favorite-button" id="${recipe.id}">❤️</button>
+          </div>
+        </section>`;
+      }
+
+    })
+  },
+  showPantry(pantry) {
+    pantryItemList.innerHTML = '';
+    pantry.pantryItems.forEach(item => {
+      pantryItemList.innerHTML += `
+      <li>${item}</li>
+      `
     })
   }
 };
