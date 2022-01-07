@@ -2,6 +2,7 @@ import './styles.css';
 import RecipeRepository from './classes/RecipeRepository';
 import Recipe from './classes/Recipe';
 import User from './classes/User';
+import Pantry from './classes/Pantry';
 import { fetchAllUsers, fetchAllRecipes, fetchAllIngredients } from './apiCalls';
 import domUpdates from './domUpdates';
 
@@ -34,19 +35,24 @@ const homeButton = document.querySelector('#homeButton');
 const favoritesHomeButton = document.querySelector('#favoritesHomeButton');
 const homeNavBar = document.querySelector('#homeNavBar');
 const favoriteNavToCookButton = document.querySelector('#favoriteNavToCookButton');
+const navPantryButton = document.querySelector('#navPantryButton');
+const favoriteNavPantryButton = document.querySelector('#favoriteNavPantryButton');
 
 //Global variables
 let recipeRepository;
 let user;
 let ingredientsData;
+let pantry;
 
 //Funtions
 const fetchAll = () => {
   Promise.all([fetchAllUsers(), fetchAllRecipes(), fetchAllIngredients()])
   .then(data => {
-    user = new User(getRandomElement(data[0]), data[2])
+    let randomUser = getRandomElement(data[0]);
+    user = new User(randomUser, data[2])
     recipeRepository = new RecipeRepository(data[1], data[2])
     ingredientsData = data[2];
+    pantry = new Pantry(randomUser, data[2]);
   })
 }
 
@@ -217,6 +223,14 @@ const returnToHomePage = () => {
   domUpdates.showFilterViewTitle('Choose options to filter recipes below')
 }
 
+const displayPantry = () => {
+  domUpdates.addHidden([landingPageView, filterView, recipeDetailsView, recipeDisplayView, favoritesNavBar]);
+  domUpdates.removeHidden([pantryView, homeNavBar])
+  // domUpdates.showPantry()
+  pantry.listPantryItems(recipeRepository);
+  console.log(pantry.pantryItems)
+}
+
 //Event Listeners
 window.addEventListener('load', fetchAll);
 
@@ -250,3 +264,7 @@ favoritesHomeButton.addEventListener('click', returnToHomePage);
 favoritesNavFavoritesButton.addEventListener('click', displayFavoriteRecipes);
 
 favoriteNavToCookButton.addEventListener('click', displayRecipesToCook);
+
+navPantryButton.addEventListener('click', displayPantry);
+
+favoriteNavPantryButton.addEventListener('click', displayPantry);
