@@ -38,6 +38,9 @@ const favoriteNavToCookButton = document.querySelector('#favoriteNavToCookButton
 const navPantryButton = document.querySelector('#navPantryButton');
 const favoriteNavPantryButton = document.querySelector('#favoriteNavPantryButton');
 const pantryItemList = document.querySelector('#pantryItemList');
+const missingIngredientsRecipeName = document.querySelector('#missingIngredientsRecipeName');
+const missingIngredients = document.querySelector('#missingIngredients');
+const missingIngredientsView = document.querySelector('#missingIngredientsView');
 
 //Global variables
 let recipeRepository;
@@ -137,6 +140,9 @@ const determineButtonAction = (event) => {
   if(event.target.classList.contains('to-cook-button')) {
     addToToCook(event);
   }
+  if(event.target.classList.contains('missing-ingredients')) {
+    displayMissingIngredients(event);
+  }
 }
 
 const addRecipeToFavorites = (event) => {
@@ -231,6 +237,16 @@ const displayPantry = () => {
   domUpdates.showPantry(pantry);
 }
 
+const displayMissingIngredients = (event) => {
+  domUpdates.addHidden([recipeDisplayView]);
+  domUpdates.removeHidden([missingIngredientsView]);
+  recipeRepository.recipes.forEach(recipe => {
+    if (event.target.id === recipe.id.toString()) {
+      pantry.determineMissingIngredients(recipe);
+      domUpdates.showMissingIngredients(pantry.listMissingIngredientsByName(), recipe);
+    }
+  })
+};
 //Event Listeners
 window.addEventListener('load', fetchAll);
 
