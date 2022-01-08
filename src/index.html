@@ -77,12 +77,30 @@
         <h2 class="pantry-heading">Pantry</h2>
         <section class="pantry-item-container" id="pantryItem">
           <div class="pantry-item-list">
-            <ul>
+            <ul id="pantryItemList">
               <li>BEANS</li>
               <li>BEANS</li>
               <!-- pantry details go here -->
-            <ul>
+            </ul>
           </div>
+        </section>
+      </section>
+      <section class="missing-ingredients-view hidden" id="missingIngredientsView">
+        <h2 id="missingIngredientTitle">Missing Ingredients</h2>
+        <section id="missingIngredientContainer">
+          <div>
+            <p class="missing-ingredients-recipe-name" id="missingIngredientsRecipeName">Recipe Name</p>
+          </div>
+          <section>
+            <ul class="missing-ingredients" id="missingIngredients">
+              <li>beans</li>
+              <li>beans</li>
+              <li>beans</li>
+            </ul>
+          </section>
+          <section>
+            <button class="add-to-pantry-button" id='addToPantryButton'>Add to Pantry</button>
+          </section>
         </section>
       </section>
     </main>
