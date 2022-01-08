@@ -16,7 +16,7 @@ export const fetchAllIngredients = () => {
     .catch(err => console.log('Oops! Something went wrong', err))
 }
 
-export const adjustUserPantry = (ingredientInfo, pantry) => {
+export const addToUserPantry = (ingredientInfo, pantry) => {
   return fetch('http://localhost:3001/api/v1/users', {
     method: 'POST',
     body: JSON.stringify({userID: parseFloat(`${pantry.id}`), ingredientID: parseFloat(`${ingredientInfo.id}`), ingredientModification: parseFloat(`${ingredientInfo.amountNeeded}`)}),
@@ -28,5 +28,19 @@ export const adjustUserPantry = (ingredientInfo, pantry) => {
   .then(data => console.log(data))
   .catch(err => console.log('Oops! Something went wrong', err))
 }
+
+export const removeFromUserPantry = (ingredientInfo, pantry) => {
+  return fetch('http://localhost:3001/api/v1/users', {
+    method: 'POST',
+    body: JSON.stringify({userID: parseFloat(`${pantry.id}`), ingredientID: parseFloat(`${ingredientInfo.id}`), ingredientModification: parseFloat(`-${ingredientInfo.quantity.amount}`)}),
+    headers: {
+      'Content-type': 'application/json'
+    }
+  })
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(err => console.log('Oops! Something went wrong', err))
+}
+
 
 console.log('I will be a fetch request!')

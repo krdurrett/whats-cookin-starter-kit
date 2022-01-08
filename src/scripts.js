@@ -144,6 +144,9 @@ const determineButtonAction = (event) => {
   if(event.target.classList.contains('missing-ingredients')) {
     displayMissingIngredients(event);
   }
+  if(event.target.classList.contains('cook-now')) {
+    removeIngredients(event);
+  }
 }
 
 const addRecipeToFavorites = (event) => {
@@ -250,10 +253,9 @@ const displayMissingIngredients = (event) => {
   })
 };
 
-
 const addIngredientsAndReturnToCook = () => {
   pantry.missingIngredients.forEach(ingredient => {
-    adjustUserPantry(ingredient, pantry);
+    addToUserPantry(ingredient, pantry);
   })
   Promise.all([fetchAllUsers(), fetchAllIngredients()])
     .then(data => {
@@ -266,6 +268,28 @@ const addIngredientsAndReturnToCook = () => {
     })
   domUpdates.showSuccessMessage();
   domUpdates.addHidden([addToPantryButton]);
+  window.setTimeout(displayRecipesToCook, 3000);
+}
+
+const removeIngredients = (event) => {
+  recipeRepository.recipes.forEach(recipe => {
+    if (event.target.id === recipe.id.toString()) {
+      recipe.ingredients.forEach(ingredient => {
+        removeFromUserPantry(ingredient, pantry)
+      })
+    }
+  })
+  Promise.all([fetchAllUsers(), fetchAllIngredients()])
+    .then(data => {
+      let updatedUser = data[0].find(user => {
+        if (user.id === pantry.id) {
+          return user
+        }
+      })
+      pantry = new Pantry(updatedUser, data[1])
+    })
+  domUpdates.showRemovalConfirmation(event);
+  // domUpdates.addHidden([addToPantryButton]);
   window.setTimeout(displayRecipesToCook, 3000);
 }
 

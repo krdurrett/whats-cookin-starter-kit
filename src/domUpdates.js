@@ -166,6 +166,9 @@ let domUpdates = {
   showSuccessMessage() {
     missingIngredientsRecipeName.innerText = `Your Ingredients Were Added to Your Pantry!`;
     missingIngredients.innerHTML = '';
+  },
+  showRemovalConfirmation(event) {
+    
   }
 };
 
