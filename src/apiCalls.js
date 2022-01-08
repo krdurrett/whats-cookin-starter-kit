@@ -16,4 +16,16 @@ export const fetchAllIngredients = () => {
     .catch(err => console.log('Oops! Something went wrong', err))
 }
 
+export const adjustUserPantry = (ingredientInfo, pantry) => {
+  return fetch('http://localhost:3001/api/v1/users', {
+    method: 'POST',
+    body: JSON.stringify({userID: parseInt(`${pantry.id}`), ingredientID: parseInt(`${ingredientInfo.id}`), ingredientModification: parseInt(`${ingredientInfo.amountNeeded}`)}),
+    headers: {
+      'Content-type': 'application/json'
+    }
+  })
+  .then(response => response.json())
+  .catch(err => console.log('Oops! Something went wrong', err))
+}
+
 console.log('I will be a fetch request!')
