@@ -3,7 +3,7 @@ import RecipeRepository from './classes/RecipeRepository';
 import Recipe from './classes/Recipe';
 import User from './classes/User';
 import Pantry from './classes/Pantry';
-import { fetchAllUsers, fetchAllRecipes, fetchAllIngredients, adjustUserPantry } from './apiCalls';
+import { fetchAllUsers, fetchAllRecipes, fetchAllIngredients, addToUserPantry, removeFromUserPantry } from './apiCalls';
 import domUpdates from './domUpdates';
 
 
@@ -42,6 +42,8 @@ const missingIngredientsRecipeName = document.querySelector('#missingIngredients
 const missingIngredients = document.querySelector('#missingIngredients');
 const missingIngredientsView = document.querySelector('#missingIngredientsView');
 const addToPantryButton = document.querySelector('#addToPantryButton');
+const missingIngredientTitle = document.querySelector('#missingIngredientTitle');
+const missingIngredientContainer = document.querySelector('#missingIngredientContainer');
 
 //Global variables
 let recipeRepository;
@@ -220,6 +222,15 @@ const addToToCook = (event) => {
 }
 
 const displayRecipesToCook = () => {
+  Promise.all([fetchAllUsers(), fetchAllIngredients()])
+    .then(data => {
+      let updatedUser = data[0].find(user => {
+        if (user.id === pantry.id) {
+          return user
+        }
+      })
+      pantry = new Pantry(updatedUser, data[1])
+    });
   domUpdates.addHidden([missingIngredientsView, pantryView, landingPageView, filterView, recipeDetailsView]);
   domUpdates.removeHidden([recipeDisplayView]);
   domUpdates.showHeading('Recipes To Cook');
@@ -243,7 +254,7 @@ const displayPantry = () => {
 
 const displayMissingIngredients = (event) => {
   domUpdates.addHidden([recipeDisplayView]);
-  domUpdates.removeHidden([missingIngredientsView]);
+  domUpdates.removeHidden([missingIngredientsView, addToPantryButton]);
   pantry.missingIngredients = [];
   recipeRepository.recipes.forEach(recipe => {
     if (event.target.id === recipe.id.toString()) {
@@ -251,22 +262,13 @@ const displayMissingIngredients = (event) => {
       domUpdates.showMissingIngredients(pantry.listMissingIngredientsByName(), recipe);
     }
   })
-};
+}
 
 const addIngredientsAndReturnToCook = () => {
   pantry.missingIngredients.forEach(ingredient => {
     addToUserPantry(ingredient, pantry);
   })
-  Promise.all([fetchAllUsers(), fetchAllIngredients()])
-    .then(data => {
-      let updatedUser = data[0].find(user => {
-        if (user.id === pantry.id) {
-          return user
-        }
-      })
-      pantry = new Pantry(updatedUser, data[1])
-    })
-  domUpdates.showSuccessMessage();
+  domUpdates.showSuccessMessage('Added To');
   domUpdates.addHidden([addToPantryButton]);
   window.setTimeout(displayRecipesToCook, 3000);
 }
@@ -275,21 +277,14 @@ const removeIngredients = (event) => {
   recipeRepository.recipes.forEach(recipe => {
     if (event.target.id === recipe.id.toString()) {
       recipe.ingredients.forEach(ingredient => {
+        console.log('IngredientID', ingredient.id, 'IngredientAmount', ingredient.quantity.amount, 'PantryID', pantry.id)
         removeFromUserPantry(ingredient, pantry)
       })
     }
   })
-  Promise.all([fetchAllUsers(), fetchAllIngredients()])
-    .then(data => {
-      let updatedUser = data[0].find(user => {
-        if (user.id === pantry.id) {
-          return user
-        }
-      })
-      pantry = new Pantry(updatedUser, data[1])
-    })
-  domUpdates.showRemovalConfirmation(event);
-  // domUpdates.addHidden([addToPantryButton]);
+  domUpdates.addHidden([recipeDisplayView, addToPantryButton]);
+  domUpdates.removeHidden([missingIngredientsView]);
+  domUpdates.showSuccessMessage('Removed From');
   window.setTimeout(displayRecipesToCook, 3000);
 }
 

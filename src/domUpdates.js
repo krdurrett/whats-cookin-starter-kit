@@ -155,6 +155,7 @@ let domUpdates = {
     })
   },
   showMissingIngredients(missingIngredientList, recipe) {
+    missingIngredientTitle.innerText = 'Missing Ingredients';
     missingIngredientsRecipeName.innerText = `${recipe.name}`;
     missingIngredients.innerHTML = '';
     missingIngredientList.forEach(ingredient => {
@@ -163,12 +164,10 @@ let domUpdates = {
       `
     })
   },
-  showSuccessMessage() {
-    missingIngredientsRecipeName.innerText = `Your Ingredients Were Added to Your Pantry!`;
+  showSuccessMessage(msg) {
+    missingIngredientTitle.innerText = `Your Ingredients Were ${msg} Your Pantry!`;
+    missingIngredientsRecipeName.innerText = '';
     missingIngredients.innerHTML = '';
-  },
-  showRemovalConfirmation(event) {
-    
   }
 };
 

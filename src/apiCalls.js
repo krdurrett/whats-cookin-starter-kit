@@ -25,7 +25,6 @@ export const addToUserPantry = (ingredientInfo, pantry) => {
     }
   })
   .then(response => response.json())
-  .then(data => console.log(data))
   .catch(err => console.log('Oops! Something went wrong', err))
 }
 
@@ -38,7 +37,6 @@ export const removeFromUserPantry = (ingredientInfo, pantry) => {
     }
   })
   .then(response => response.json())
-  .then(data => console.log(data))
   .catch(err => console.log('Oops! Something went wrong', err))
 }
 
