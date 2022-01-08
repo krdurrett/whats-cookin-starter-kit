@@ -148,8 +148,8 @@ button {
   margin-top: 15px;
   height: 20%;
   width: 100%;
-  /* padding: 10px; */
-  border: 2px solid red;
+  padding: 3px;
+  padding-bottom: 10px;
 }
 
 .to-cook-button,
@@ -270,8 +270,10 @@ button {
   overflow-y: auto;
 }
 
-.determine-cookability {
+.missing-ingredients,
+.cook-now {
   height: 100%;
+  margin: 3px;
 }
 
 .hidden {
