@@ -1,4 +1,4 @@
-import './styles.css';
+import './index.scss';
 import RecipeRepository from './classes/RecipeRepository';
 import Recipe from './classes/Recipe';
 import User from './classes/User';

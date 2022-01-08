@@ -1,5 +1,5 @@
-@import 'mixins';
-@import 'variables';
+@import '_mixins.scss';
+@import '_variables.scss';
 
 * {
   box-sizing: border-box;
@@ -26,6 +26,7 @@ body {
 }
 
 main {
+  /* @include flexbox(column, center, center); */
   display: flex;
   flex-direction: column;
   height: 100vh;
