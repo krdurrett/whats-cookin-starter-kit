@@ -128,7 +128,7 @@ let domUpdates = {
           <img class="recipe-card-img" src="${recipe.image}">
           <button class="recipe-name-button" id="${recipe.id}" >${recipe.name}</button>
           <div class="recipe-card-buttons">
-            <button class="determine-cookability">Cook now and remove ingredients from pantry</button>
+            <button class="cook-now" id="${recipe.id}">Cook now and remove ingredients from pantry</button>
             <button class="add-favorite-button" id="${recipe.id}">❤️</button>
           </div>
         </section>`;
@@ -138,7 +138,7 @@ let domUpdates = {
           <img class="recipe-card-img" src="${recipe.image}">
           <button class="recipe-name-button" id="${recipe.id}" >${recipe.name}</button>
           <div class="recipe-card-buttons">
-            <button class="determine-cookability">You are missing ingredients. Click to view them.</button>
+            <button class="missing-ingredients" id="${recipe.id}">You are missing ingredients. Click to view them.</button>
             <button class="add-favorite-button" id="${recipe.id}">❤️</button>
           </div>
         </section>`;
@@ -151,6 +151,15 @@ let domUpdates = {
     pantry.pantryItems.forEach(item => {
       pantryItemList.innerHTML += `
       <li>${item}</li>
+      `
+    })
+  },
+  showMissingIngredients(missingIngredientList, recipe) {
+    missingIngredientsRecipeName.innerText = `${recipe.name}`;
+    missingIngredients.innerHTML = '';
+    missingIngredientList.forEach(ingredient => {
+      missingIngredients.innerHTML += `
+        <li>${ingredient.name} ${ingredient.amountNeeded} ${ingredient.unit}</li>
       `
     })
   }
