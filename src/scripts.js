@@ -241,6 +241,7 @@ const displayPantry = () => {
 const displayMissingIngredients = (event) => {
   domUpdates.addHidden([recipeDisplayView]);
   domUpdates.removeHidden([missingIngredientsView]);
+  pantry.missingIngredients = [];
   recipeRepository.recipes.forEach(recipe => {
     if (event.target.id === recipe.id.toString()) {
       pantry.determineMissingIngredients(recipe);
