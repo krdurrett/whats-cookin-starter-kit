@@ -2,11 +2,12 @@
 @import '_variables.scss';
 
 * {
+  font-family: sans-serif;
   box-sizing: border-box;
 }
 
 html {
-  height: 100vh;
+  @include heightAndWidth(100vh, none);
 }
 
 body {
@@ -16,75 +17,51 @@ body {
   margin: 0;
 }
 
-.glide {
-  width: 10%;
-}
-
-.glide__slide {
-  width: 10px;
-  height: 10px;
-}
-
 main {
-  /* @include flexbox(column, center, center); */
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
+  @include flexbox(column, none, none);
+  @include heightAndWidth(100vh, none);
 }
 
 nav {
- height: 15%;
+  @include heightAndWidth(15%, none);
 }
 
 .home-nav-bar,
 .favorites-nav-bar {
-  display: flex;
-  align-items: center;
+  @include flexbox(none, none, center);
   background-color: rgba(225, 225, 225, .6);
-  width: 100%;
-  height: 100%;
+  @include heightAndWidth(100%, 100%);
 }
 
 .home-button-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 15%;
-  height: 100%;
+  @include flexbox(none, center, center);
+  @include heightAndWidth(100%, 15%);
 }
 
 .home-button {
-  width: 80%;
-  height: 80%;
+  @include heightAndWidth(80%, 80%);
 }
 
 .nav-search-bar {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 60%;
-  height: 100%;
+  @include flexbox(none, center, center);
+  @include heightAndWidth(100%, 60%);
 }
 
 .search-input {
-  width: 70%;
-  height: 50%;
+  @include heightAndWidth(50%, 70%);
 }
 
 .search-button {
-  width: 20%;
-  height: 50%;
+  @include heightAndWidth(50%, 20%);
 }
 
 .nav-button-container {
-  display: flex;
-  justify-content: space-around;
-  width: 30%;
-  height: 50%;
+  @include flexbox(none, space-around, none);
+  @include heightAndWidth(50%, 30%);
 }
 
 .nav-buttons {
-  width: 25%;
+  @include heightAndWidth(none, 25%);
 }
 
 button {
@@ -92,17 +69,13 @@ button {
 }
 
 .landing-page-view {
-  display: flex;
-  flex-direction: column;
-  justify-content: end;
+  @include flexbox(column, flex-end, none);
+  @include heightAndWidth(90%, 30%);
   padding: 2%;
-  height: 90%;
-  width: 30%;
 }
 
 .all-recipes-button {
-  height: 50%;
-  width: 90%;
+  @include heightAndWidth(50%, 90%);
   border-radius: 50%;
   border: none;
   background-color: rgba(225, 225, 225, .6);
@@ -110,48 +83,41 @@ button {
 }
 
 .recipe-display-view {
-  height: 85%;
+  @include heightAndWidth(85%, none);
 }
 
 .recipe-card-section {
-  display: flex;
+  @include flexbox(none, none, none);
   flex-wrap: wrap;
+  @include heightAndWidth(90%, 100%);
   padding-left: 10%;
-  width: 100%;
-  height: 90%;
   overflow-y: auto;
 }
 
 .recipe-card {
-  display: flex;
-  flex-direction: column;
+  @include flexbox(column, none, none);
+  @include heightAndWidth(45%, 17%);
   background-color: #f3f6f4;
   box-shadow: 1px 1px 1px #444444;
   margin: 20px;
-  width: 17%;
-  height: 45%;
 }
 
 .recipe-card-img {
-  width: auto;
-  height: 60%;
-
+  @include heightAndWidth(60%, auto);
 }
 
 .recipe-name-button {
+  @include heightAndWidth(20%, none);
   border: 1px solid #bcbcbc;
   box-shadow: 0px 2px 2px #999999;
-  height: 20%;
   margin: 0;
   padding: 0;
 }
 
 .recipe-card-buttons {
-  display: flex;
-  justify-content: space-between;
+  @include flexbox(none, space-between, none);
+  @include heightAndWidth(20%, 100%);
   margin-top: 15px;
-  height: 20%;
-  width: 100%;
   padding: 3px;
   padding-bottom: 10px;
 }
@@ -166,61 +132,58 @@ button {
 }
 
 .recipe-details-view {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
+  @include flexbox(column, center, center);
+  @include heightAndWidth(100%, none);
+}
+
+span {
+  @include flexbox(none, center, center);
+  @include heightAndWidth(20%, 30%)
+  background-color: rgba(225, 225, 225, .6);
+  font-size: 30px;
+  margin: 10px;
 }
 
 .recipe-header {
-  display: flex;
-  justify-content: space-between;
+  @include flexbox(none, space-between, none);
+  @include heightAndWidth(none, 100%);
   background-image: url("https://spoonacular.com/recipeImages/595736-556x370.jpg");
   background-repeat: no-repeat;
   background-size: cover;
-  width: 100%;
 }
 
 .recipe-details {
-  display: flex;
-  justify-content: space-around;
+  @include flexbox(none, space-around, none);
   overflow-y: auto;
 }
 
 .recipe-details,
 .recipe-header {
-  height: 40%;
-  width: 60%;
+  @include heightAndWidth(40%, 60%);
   background-color: rgba(225, 225, 225, .6);
 }
 
 .recipe-detail-buttons {
-  display: flex;
-  align-items: flex-end;
+  @include flexbox(none, none, flex-end);
   align-self: flex-start;
 }
 
 .ingredients {
-  width: 25%;
+  @include heightAndWidth(none, 25%);
 }
+
 .instructions {
-  width: 75%;
+  @include heightAndWidth(none, 75%);
 }
 
 .filter-view {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
+  @include flexbox(none, center, center);
+  @include heightAndWidth(100%, none);
 }
 
 .filter-form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: 75%;
-  width: 50%;
+  @include flexbox(column, none, center);
+  @include heightAndWidth(75%, 50%);
   background-color: rgba(225, 225, 225, .6);
 }
 
@@ -229,54 +192,54 @@ button {
 }
 
 .tag-style-div {
-  display: flex;
+  @include flexbox(none, none, none);
+  @include heightAndWidth(10%, 50%);
   font-size: 20px;
-  height: 10%;
-  width: 50%;
 }
 
 .filter-view-tags {
-  display: flex;
-  align-items: flex-start;
-  flex-direction: column;
+  @include flexbox(column, none, flex-start);
+  @include heightAndWidth(75%, 50%);
   flex-wrap: wrap;
-  width: 50%;
-  height: 75%;
+}
+
+.filter-view-button-container {
+  @include flexbox(none, center, center);
+  @include heightAndWidth(50%, 50%);
 }
 
 .filter-view-button {
-  border: 2px solid purple;
+  @include heightAndWidth(50%, 50%);
+  border: 1px solid #bcbcbc;
+  box-shadow: 0px 2px 2px #999999;
+  font-size: 20px;
 }
 
 .pantry-heading {
-  display: flex;
+  @include flexbox(none, none, none);
   align-self: flex-start;
   margin: 0;
 }
 
 .pantry-view {
-  height: 100%;
+  @include heightAndWidth(80%, none);
 }
 
 .pantry-item-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
+  @include flexbox(none, center, center);
+  @include heightAndWidth(100%, none);
 }
 
 .pantry-item-list {
-  display: flex;
-  justify-content: center;
+  @include flexbox(none, center, none);
+  @include heightAndWidth(80%, 60%);
   background-color: rgba(225, 225, 225, .6);
-  height: 80%;
-  width: 60%;
   overflow-y: auto;
 }
 
 .missing-ingredients,
 .cook-now {
-  height: 100%;
+  @include heightAndWidth(100%, none);
   margin: 3px;
 }
 
