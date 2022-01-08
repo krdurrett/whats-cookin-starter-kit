@@ -25,6 +25,7 @@ export const adjustUserPantry = (ingredientInfo, pantry) => {
     }
   })
   .then(response => response.json())
+  .then(data => console.log(data))
   .catch(err => console.log('Oops! Something went wrong', err))
 }
 

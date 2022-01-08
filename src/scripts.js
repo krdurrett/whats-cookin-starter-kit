@@ -250,11 +250,23 @@ const displayMissingIngredients = (event) => {
   })
 };
 
+
 const addIngredientsAndReturnToCook = () => {
   pantry.missingIngredients.forEach(ingredient => {
-    console.log('>>>>>>>>', ingredient.id, ingredient.amountNeeded, 'patryID', pantry.id)
     adjustUserPantry(ingredient, pantry);
   })
+  Promise.all([fetchAllUsers(), fetchAllIngredients()])
+    .then(data => {
+      let updatedUser = data[0].find(user => {
+        if (user.id === pantry.id) {
+          return user
+        }
+      })
+      pantry = new Pantry(updatedUser, data[1])
+    })
+  domUpdates.showSuccessMessage();
+  domUpdates.addHidden([addToPantryButton]);
+  window.setTimeout(displayRecipesToCook, 3000);
 }
 
 //Event Listeners

@@ -162,6 +162,10 @@ let domUpdates = {
         <li>${ingredient.name} ${ingredient.amountNeeded} ${ingredient.unit}</li>
       `
     })
+  },
+  showSuccessMessage() {
+    missingIngredientsRecipeName.innerText = `Your Ingredients Were Added to Your Pantry!`;
+    missingIngredients.innerHTML = '';
   }
 };
 
