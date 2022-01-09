@@ -61,6 +61,7 @@ const fetchAll = () => {
     ingredientsData = data[2];
     pantry = new Pantry(randomUser, data[2]);
   })
+  .catch(err => displayGetErrorMsg());
 }
 
 const getRandomElement = array => {
@@ -270,7 +271,8 @@ const addIngredientsAndReturnToCook = () => {
         }
       })
       pantry = new Pantry(updatedUser, data[1])
-    });}, 3000);
+    })
+    .catch(err => displayGetErrorMsg());}, 3000);
   window.setTimeout(displayRecipesToCook, 3500);
 }
 
@@ -278,7 +280,6 @@ const removeIngredients = (event) => {
   recipeRepository.recipes.forEach(recipe => {
     if (event.target.id === recipe.id.toString()) {
       recipe.ingredients.forEach(ingredient => {
-        console.log('IngredientID', ingredient.id, 'IngredientAmount', ingredient.quantity.amount, 'PantryID', pantry.id)
         removeFromUserPantry(ingredient, pantry)
       })
     }
@@ -295,8 +296,21 @@ const removeIngredients = (event) => {
         }
       })
       pantry = new Pantry(updatedUser, data[1])
-    });}, 3000);
+    })
+    .catch(err => displayGetErrorMsg());}, 3000);
   window.setTimeout(displayRecipesToCook, 3500);
+}
+
+const displayGetErrorMsg = () => {
+  domUpdates.addHidden([landingPageView, addToPantryButton, missingIngredientContainer]);
+  domUpdates.removeHidden([missingIngredientsView]);
+  domUpdates.showErrorMessage(`Something went wrong while trying to obtain data`)
+}
+
+export const displayPostErrorMsg = error => {
+  domUpdates.addHidden([addToPantryButton, missingIngredientContainer, recipeDisplayView]);
+  domUpdates.removeHidden([missingIngredientsView]);
+  domUpdates.showErrorMessage(error);
 }
 
 //Event Listeners

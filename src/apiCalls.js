@@ -1,19 +1,18 @@
+import { displayPostErrorMsg } from './scripts';
+
 export const fetchAllUsers = () => {
     return fetch('http://localhost:3001/api/v1/users')
       .then(response => response.json())
-      .catch(err => console.log('Oops! Something went wrong', err))
 }
 
 export const fetchAllRecipes = () => {
   return fetch('http://localhost:3001/api/v1/recipes')
     .then(response => response.json())
-    .catch(err => console.log('Oops! Something went wrong', err))
 }
 
 export const fetchAllIngredients = () => {
   return fetch('http://localhost:3001/api/v1/ingredients')
     .then(response => response.json())
-    .catch(err => console.log('Oops! Something went wrong', err))
 }
 
 export const addToUserPantry = (ingredientInfo, pantry) => {
@@ -25,7 +24,8 @@ export const addToUserPantry = (ingredientInfo, pantry) => {
     }
   })
   .then(response => response.json())
-  .catch(err => console.log('Oops! Something went wrong', err))
+  .then(data => displayPostErrorMsg(data.message))
+  .catch(err => displayPostErrorMsg(err))
 }
 
 export const removeFromUserPantry = (ingredientInfo, pantry) => {
@@ -37,7 +37,8 @@ export const removeFromUserPantry = (ingredientInfo, pantry) => {
     }
   })
   .then(response => response.json())
-  .catch(err => console.log('Oops! Something went wrong', err))
+  .then(data => displayPostErrorMsg(data.message))
+  .catch(err => displayPostErrorMsg(err))
 }
 
 
