@@ -168,6 +168,11 @@ let domUpdates = {
     missingIngredientTitle.innerText = `Your Ingredients Were ${msg} Your Pantry!`;
     missingIngredientsRecipeName.innerText = '';
     missingIngredients.innerHTML = '';
+  },
+  showErrorMessage(error) {
+    missingIngredientTitle.innerText = `${error}`;
+    missingIngredientsRecipeName.innerText = '';
+    missingIngredients.innerHTML = '';
   }
 };
 
