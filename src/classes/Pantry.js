@@ -3,7 +3,7 @@ import User from '../classes/User';
 class Pantry extends User {
   constructor(usersData, ingredientsData) {
     super(usersData, ingredientsData);
-    this.hasAllIngredients = false;
+    this.hasAllIngredients = true;
     this.missingIngredients = [];
     this.pantryItems = [];
   }
@@ -22,9 +22,7 @@ class Pantry extends User {
         this.hasAllIngredients = false
       } else if (foundPantryIngredient.amount < foundRecipeIngredient.quantity.amount) {
         this.hasAllIngredients = false
-      } else if (foundPantryIngredient.amount > foundRecipeIngredient.quantity.amount) {
-        this.hasAllIngredients = true
-      }
+      } 
     })
   }
   determineMissingIngredients(recipe) {

@@ -222,15 +222,6 @@ const addToToCook = (event) => {
 }
 
 const displayRecipesToCook = () => {
-  Promise.all([fetchAllUsers(), fetchAllIngredients()])
-    .then(data => {
-      let updatedUser = data[0].find(user => {
-        if (user.id === pantry.id) {
-          return user
-        }
-      })
-      pantry = new Pantry(updatedUser, data[1])
-    });
   domUpdates.addHidden([missingIngredientsView, pantryView, landingPageView, filterView, recipeDetailsView]);
   domUpdates.removeHidden([recipeDisplayView]);
   domUpdates.showHeading('Recipes To Cook');
@@ -270,7 +261,17 @@ const addIngredientsAndReturnToCook = () => {
   })
   domUpdates.showSuccessMessage('Added To');
   domUpdates.addHidden([addToPantryButton, missingIngredientContainer]);
-  window.setTimeout(displayRecipesToCook, 3000);
+  window.setTimeout(function() {
+    Promise.all([fetchAllUsers(), fetchAllIngredients()])
+    .then(data => {
+      let updatedUser = data[0].find(user => {
+        if (user.id === pantry.id) {
+          return user
+        }
+      })
+      pantry = new Pantry(updatedUser, data[1])
+    });}, 3000);
+  window.setTimeout(displayRecipesToCook, 3500);
 }
 
 const removeIngredients = (event) => {
@@ -285,7 +286,17 @@ const removeIngredients = (event) => {
   domUpdates.addHidden([recipeDisplayView, addToPantryButton, missingIngredientContainer]);
   domUpdates.removeHidden([missingIngredientsView]);
   domUpdates.showSuccessMessage('Removed From');
-  window.setTimeout(displayRecipesToCook, 3000);
+  window.setTimeout(function() {
+    Promise.all([fetchAllUsers(), fetchAllIngredients()])
+    .then(data => {
+      let updatedUser = data[0].find(user => {
+        if (user.id === pantry.id) {
+          return user
+        }
+      })
+      pantry = new Pantry(updatedUser, data[1])
+    });}, 3000);
+  window.setTimeout(displayRecipesToCook, 3500);
 }
 
 //Event Listeners
