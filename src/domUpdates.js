@@ -40,11 +40,11 @@ let domUpdates = {
       return acc;
     }, ``);
     recipeDetailsView.innerHTML = `
-    <section class="recipe-header" id="recipeHeader">
+    <section class="recipe-header" id="recipeHeader" tabindex=0>
       <span>${selectedRecipe.name}</span>
       <span>$${selectedRecipe.getRecipeCost()}</span>
     </section>
-    <div class= "recipe-details">
+    <div class="recipe-details" tabindex=0>
       <section class="ingredients">
         <h2>Ingredients</h2>
         <ul>${ingredientNames}</ul>
