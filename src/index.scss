@@ -12,7 +12,7 @@ html {
 }
 
 body {
-  background-image: url("https://spoonacular.com/recipeImages/595736-556x370.jpg");
+  background-image: url("https://media.istockphoto.com/photos/wooden-texture-board-on-blurred-kitchen-window-of-pastel-color-picture-id1223182742?k=20&m=1223182742&s=612x612&w=0&h=pG0B3EM54e6QbsY8PxudxK7c9_IELTY8QOlKGgExKzY=");
   background-repeat: no-repeat;
   background-size: cover;
   margin: 0;
@@ -30,7 +30,7 @@ nav {
 .home-nav-bar,
 .favorites-nav-bar {
   @include flexbox(none, none, center);
-  background-color: rgba(225, 225, 225, .6);
+  background-color: $white-background;
   @include heightAndWidth(100%, 100%);
 }
 
@@ -67,6 +67,8 @@ nav {
 
 button {
   cursor: pointer;
+  border: 1px solid #bcbcbc;
+  box-shadow: 0px 2px 2px #999999;
 }
 
 .landing-page-view {
@@ -79,7 +81,7 @@ button {
   @include heightAndWidth(50%, 90%);
   border-radius: 50%;
   border: none;
-  background-color: rgba(225, 225, 225, .6);
+  background-color: $white-background;
   font-size: 25px;
 }
 
@@ -100,11 +102,14 @@ button {
   @include heightAndWidth(45%, 17%);
   background-color: #f3f6f4;
   box-shadow: 1px 1px 1px #444444;
+  border-radius: 5px;
   margin: 20px;
 }
 
 .recipe-card-img {
   @include heightAndWidth(60%, auto);
+  border-radius: 5px 5px 0px 0px;
+
 }
 
 .recipe-name-button {
@@ -139,8 +144,8 @@ button {
 
 span {
   @include flexbox(none, center, center);
-  @include heightAndWidth(20%, 30%)
-  background-color: rgba(225, 225, 225, .6);
+  @include heightAndWidth(20%, 30%);
+  background-color: $white-background;
   font-size: 30px;
   margin: 10px;
 }
@@ -161,7 +166,7 @@ span {
 .recipe-details,
 .recipe-header {
   @include heightAndWidth(40%, 60%);
-  background-color: rgba(225, 225, 225, .6);
+  background-color: $white-background;
 }
 
 .recipe-detail-buttons {
@@ -185,7 +190,7 @@ span {
 .filter-form {
   @include flexbox(column, none, center);
   @include heightAndWidth(75%, 50%);
-  background-color: rgba(225, 225, 225, .6);
+  background-color: $white-background;
 }
 
 .filter-view-title {
@@ -234,7 +239,7 @@ span {
 .pantry-item-list {
   @include flexbox(none, center, none);
   @include heightAndWidth(80%, 60%);
-  background-color: rgba(225, 225, 225, .6);
+  background-color: $white-background;
   overflow-y: auto;
 }
 
@@ -242,6 +247,26 @@ span {
 .cook-now {
   @include heightAndWidth(100%, none);
   margin: 3px;
+}
+
+.missing-ingredients-view {
+  @include flexbox(column, center, center);
+  @include heightAndWidth(80%, 100%);
+}
+
+.missing-ingredients-container {
+  @include flexbox(column, center, center);
+  @include heightAndWidth(80%, 60%);
+  background-color: $white-background;
+}
+
+.add-to-pantry-button-section {
+  @include flexbox(column, center, center);
+  @include heightAndWidth(30%, 60%);
+}
+
+.add-to-pantry-button {
+  @include heightAndWidth(25%, 30%);
 }
 
 .hidden {

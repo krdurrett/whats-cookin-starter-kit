@@ -269,7 +269,7 @@ const addIngredientsAndReturnToCook = () => {
     addToUserPantry(ingredient, pantry);
   })
   domUpdates.showSuccessMessage('Added To');
-  domUpdates.addHidden([addToPantryButton]);
+  domUpdates.addHidden([addToPantryButton, missingIngredientContainer]);
   window.setTimeout(displayRecipesToCook, 3000);
 }
 
@@ -282,7 +282,7 @@ const removeIngredients = (event) => {
       })
     }
   })
-  domUpdates.addHidden([recipeDisplayView, addToPantryButton]);
+  domUpdates.addHidden([recipeDisplayView, addToPantryButton, missingIngredientContainer]);
   domUpdates.removeHidden([missingIngredientsView]);
   domUpdates.showSuccessMessage('Removed From');
   window.setTimeout(displayRecipesToCook, 3000);
