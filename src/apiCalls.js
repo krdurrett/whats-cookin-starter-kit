@@ -1,4 +1,4 @@
-import { displayPostErrorMsg } from './scripts';
+import { determineAPIResponse, displayCatchError } from './scripts';
 
 export const fetchAllUsers = () => {
     return fetch('http://localhost:3001/api/v1/users')
@@ -23,9 +23,8 @@ export const addToUserPantry = (ingredientInfo, pantry) => {
       'Content-type': 'application/json'
     }
   })
-  .then(response => response.json())
-  .then(data => displayPostErrorMsg(data.message))
-  .catch(err => displayPostErrorMsg(err))
+  .then(response => determineAPIResponse(response, 'Added To'))
+  .catch(err => displayCatchError())
 }
 
 export const removeFromUserPantry = (ingredientInfo, pantry) => {
@@ -36,9 +35,8 @@ export const removeFromUserPantry = (ingredientInfo, pantry) => {
       'Content-type': 'application/json'
     }
   })
-  .then(response => response.json())
-  .then(data => displayPostErrorMsg(data.message))
-  .catch(err => displayPostErrorMsg(err))
+  .then(response => determineAPIResponse(response, 'Removed From'))
+  .catch(err => displayCatchError())
 }
 
 

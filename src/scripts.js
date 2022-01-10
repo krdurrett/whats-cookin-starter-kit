@@ -222,7 +222,7 @@ const addToToCook = (event) => {
   })
 }
 
-const displayRecipesToCook = () => {
+export const displayRecipesToCook = () => {
   domUpdates.addHidden([missingIngredientsView, pantryView, landingPageView, filterView, recipeDetailsView]);
   domUpdates.removeHidden([recipeDisplayView]);
   domUpdates.showHeading('Recipes To Cook');
@@ -257,11 +257,13 @@ const displayMissingIngredients = (event) => {
 }
 
 const addIngredientsAndReturnToCook = () => {
-  pantry.missingIngredients.forEach(ingredient => {
-    addToUserPantry(ingredient, pantry);
-  })
-  domUpdates.showSuccessMessage('Added To');
-  domUpdates.addHidden([addToPantryButton, missingIngredientContainer]);
+  if (pantry.missingIngredients.length === 0) {
+    displayRecipesToCook()
+  } else {
+    pantry.missingIngredients.forEach(ingredient => {
+      addToUserPantry(ingredient, pantry);
+    })
+  }
   window.setTimeout(function() {
     Promise.all([fetchAllUsers(), fetchAllIngredients()])
     .then(data => {
@@ -284,9 +286,6 @@ const removeIngredients = (event) => {
       })
     }
   })
-  domUpdates.addHidden([recipeDisplayView, addToPantryButton, missingIngredientContainer]);
-  domUpdates.removeHidden([missingIngredientsView]);
-  domUpdates.showSuccessMessage('Removed From');
   window.setTimeout(function() {
     Promise.all([fetchAllUsers(), fetchAllIngredients()])
     .then(data => {
@@ -307,10 +306,22 @@ const displayGetErrorMsg = () => {
   domUpdates.showErrorMessage(`Something went wrong while trying to obtain data`)
 }
 
-export const displayPostErrorMsg = error => {
+export const determineAPIResponse = (response, message) => {
+  if (response.ok) {
+    domUpdates.showSuccessMessage(message);
+  } else if (!response.ok) {
+    Promise.resolve(response)
+      .then(resp => resp.json())
+      .then(data => domUpdates.showErrorMessage(data.message))
+  }
   domUpdates.addHidden([addToPantryButton, missingIngredientContainer, recipeDisplayView]);
   domUpdates.removeHidden([missingIngredientsView]);
-  domUpdates.showErrorMessage(error);
+}
+
+export const displayCatchError = () => {
+  domUpdates.addHidden([addToPantryButton, missingIngredientContainer, recipeDisplayView]);
+  domUpdates.removeHidden([missingIngredientsView]);
+  domUpdates.showErrorMessage('Something went wrong');
 }
 
 //Event Listeners
